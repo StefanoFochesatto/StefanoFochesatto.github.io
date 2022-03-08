@@ -11,10 +11,17 @@ pagetitle: "Stefano Fochesatto"
                                                 padding: 5px; 
                                                 border-radius: 8px; 
                                                 margin-right: 20px" align="left">
+                                                
+                                      
+## About
 
-I am an graduate student at the University of Alaska Fairbanks studying applied mathematics. I also work as a graduate researcher in the Museum of the North Herbarium laboratory, apply machine learning and computer vision to species delineation on herbarium sheet samples. 
 
-My research interests are in numerical analysis, machine learning, and graph theory. 
+<font size='4'>
+I am an graduate student at the University of Alaska Fairbanks studying applied mathematics. 
+I also work as a graduate researcher in the Museum of the North Herbarium laboratory, apply 
+machine learning and computer vision to species delineation on herbarium sheet samples. 
 
+My research interests include numerical analysis, machine learning, and graph theory.
+</font>
 
 
