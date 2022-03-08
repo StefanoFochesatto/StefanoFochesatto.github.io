@@ -1,0 +1,9 @@
+---
+title: " "
+pagetitle: "Stefano Fochesatto"
+---
+
+<link rel="stylesheet" href="styles.css" type="text/css">
+<link rel="stylesheet" href="academicicons/css/academicons.min.css"/>
+
+## Slides for any talks, or presentations, projects, and posters go here. 

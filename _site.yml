@@ -1,0 +1,29 @@
+name: "Stefano Fochesatto"
+output_dir: "."
+navbar:
+  title: "Stefano Fochesatto"
+  left:
+    - text: "Course Work"
+      href: course.html
+    - text: "Research"
+      href: research.html
+    - text: "Speaking"
+      href: talks.html
+    - text: "Programming"
+      href: software.html
+    - text: "Blog"
+      href: blog.html
+      
+  right:
+    - icon: fa-envelope fa-lg
+      href: contact.html
+    - icon: ai-cv ai-lg
+      href: ./files/Stefano_Resume.pdf
+    - icon: fab fa-github fa-lg
+      href: http://github.com/StefanoFochesatto
+    - icon: fab fa-linkedin fa-lg
+      href: https://www.linkedin.com/in/stefano-fochesatto-076447213/
+output:
+  html_document:
+    theme: readable
+    css: 'styles.css'

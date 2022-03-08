@@ -1,0 +1,32 @@
+---
+title: " "
+pagetitle: 'Stefano Fochesatto'
+classoption:
+- twocolumn
+---
+
+<link rel="stylesheet" href="styles.css" type="text/css">
+<link rel="stylesheet" href="academicicons/css/academicons.min.css"/>
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+**University of Alaska Fairbanks**<br>
+505 S Chandalar <br>
+Fairbanks, AK 99775<br>
+907-888-3950<br>
+[gsfochesatto@alaka.edu](gsfochesatto@alaska.edu) <br>
+Or connect with me on [GitHub](https://github.com/StefanoFochesatto) or [Linkedin](https://www.linkedin.com/in/stefano-fochesatto-076447213/) <br>
+:::
+::: {.column width="50%"}
+<img src="images/uaf.png" style="width:130px; margin-right: 20px" align="right">
+:::
+::::::::::::::
+
+
+
+
+
+
+
+
+
