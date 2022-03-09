@@ -9,12 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Stefano Fochesatto" />
 
 
 <title>Species Delineation from Herbarium Sheet Samples</title>
 
-<script src="site_libs/header-attrs-2.12/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
@@ -63,7 +62,6 @@ if (window.hljs) {
 
 
 
-
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
 
@@ -88,9 +86,6 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
 }
 pre code {
   padding: 0;
@@ -316,7 +311,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -376,294 +371,62 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Species Delineation from Herbarium Sheet Samples</h1>
-<h4 class="author">Stefano Fochesatto</h4>
 
 </div>
 
 
 <p><link rel="stylesheet" href="styles.css" type="text/css"> <link rel="stylesheet" href="academicicons/css/academicons.min.css"/></p>
-<div id="this-section-will-contain-my-current-research-on-herbarium-sheet-samples." class="section level3">
-<h3>This section will contain my current research on herbarium sheet samples.</h3>
-<p>This tutorial provides an introduction to creating websites using R, R Markdown and GitHub pages.</p>
-<p>Updates were made on November 6, 2020 to simplify the personal website example as some extraneous pieces of information there were giving people problems. See new example website for my cats, John and Pete!</p>
-<p>The current version was updated and presented at the R Ladies NYC Meetup on February 15, 2018.</p>
-<p>This tutorial was originally presented at the Memorial Sloan Kettering Cancer Center Department of Epidemiology and Biostatistics R User Group meeting on January 23, 2018.</p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>This Section still needs an introduction/ like an abstract.</p>
 </div>
-<div id="types-of-websites" class="section level2">
-<h2>Types of websites</h2>
-<p>The main types of websites you may want to create include:</p>
-<ol style="list-style-type: decimal">
-<li>Personal websites</li>
-<li>Package websites</li>
-<li>Project websites</li>
-<li>Blogs</li>
-</ol>
+<div id="building-the-segmentation-masks" class="section level2">
+<h2>Building the Segmentation Masks</h2>
+<p>Before we are able to start working on training a model to cluster the images we need to remove any biasing information from the images. This involves creating something called a segmentation mask, which will essentially remove any biasing information involved in capturing the herbarium sheet samples. The way that the mask works is we will create a black and white image, where there is no presence of the plant sample we will color the image black and where there is we will color the image white.</p>
+<p>In terms of biasing information think, camera settings, or any identifying labels. Ideally we want the segmentation mask to still capture all the information that a paleo-botanist would use when delineating species. I’m told that most of the time this information if found almost entirely in the morphology of the leaves.</p>
+<p>We will be using a workflow described in the following <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7328659/">article</a> by Alexander White, Rebecca Dikow, et.al, Their article describes training a neural network to be able to recreate segmentation masks for fern shaped herbarium sheets. To accomplish this tasks they had to develop a workflow for creating several ‘ground truth’ masks. This is the part of their research that we will be taking advantage of. Currently this workflow involves a good amount of editing by hand if in the later stages of our research, we decide that more data is needed we might spend time training a neural network to create these masks for us.</p>
+<p>Mapping out the workflow for building the segmentation masks, consider the following,</p>
+<p><img src="images/SegmentationWorkflow.png" style="width:100%" align="center"></p>
 </div>
-<div id="r-markdown-website-basics" class="section level2">
-<h2>R Markdown website basics</h2>
-<p>The minimum requirements for an R Markdown website are:</p>
-<ul>
-<li><code>index.Rmd</code>: contains the content for the website homepage</li>
-<li><code>_site.yml</code>: contains metadata for the website</li>
-</ul>
-<p>A basic example of a <code>_site.yml</code> file for a website with two pages:</p>
-<pre class="r"><code>name: &quot;my-website&quot;
-navbar:
-  title: &quot;My Website&quot;
-  left:
-    - text: &quot;Home&quot;
-      href: index.html
-    - text: &quot;About&quot;
-      href: about.html</code></pre>
-<p>And a basic <code>index.Rmd</code> to create the Home page:</p>
-<pre class="r"><code>---
-title: &quot;My Website&quot;
----
-    
-Hello, Website! Welcome to the world.</code></pre>
-<p>You can find an overview of R Markdown website basics <a href="http://rmarkdown.rstudio.com/rmarkdown_websites.html">here</a>.</p>
-</div>
-<div id="github" class="section level2">
-<h2>GitHub</h2>
-<p>This tutorial will focus on hosting websites through GitHub pages. Hosting websites on GitHub pages is free.</p>
-<p>If you don’t have a GitHub account already, sign up for one at <a href="https://github.com/join?source=header-home">https://github.com/join?source=header-home</a> with username YOUR_GH_NAME. I’ll be referring to this username, YOUR_GH_NAME, as “your GitHub username” throughout this tutorial.</p>
-<p>There are other free sites for website hosting, and another popular choice is <a href="https://www.netlify.com/">Netlify</a>.</p>
-</div>
-<div id="personal-websites" class="section level2">
-<h2>Personal websites</h2>
-<p>Let’s say that I wanted to build a website for my cats.</p>
-<p>There are two main steps for creating a personal website that will be hosted on GitHub:</p>
-<ol style="list-style-type: decimal">
-<li>GitHub setup</li>
-<li>Local setup</li>
-</ol>
-<div id="github-setup" class="section level3">
-<h3>GitHub setup</h3>
-<ol style="list-style-type: decimal">
-<li>Create a GitHub repository (“repo”) named YOUR_GH_NAME.github.io, where YOUR_GH_NAME is your GitHub username.</li>
-<li>Initialize it with a README
-<ul>
-<li>For the GitHub inexperienced: this can ease the process of cloning the repo by initializing the remote repo with a master branch</li>
-</ul></li>
-</ol>
-</div>
-<div id="local-setup" class="section level3">
-<h3>Local setup</h3>
-<ol style="list-style-type: decimal">
-<li>Clone this remote repository to a local directory with the same name, YOUR_GH_NAME.github.io</li>
-<li>Add an R Project to this directory</li>
-<li>Create a <code>_site.yml</code> and <code>index.Rmd</code> file in your new directory</li>
-</ol>
-</div>
-<div id="why-do-i-need-an-r-project" class="section level3">
-<h3>Why do I need an R Project?</h3>
-<p>The R Project is useful because RStudio will recognize your project as a website, and provide appropriate build tools.</p>
-<p>Note: After creating the R Project and initial files, you may need to close the project and reopen it before R will recognize it as a website and show the appropriate build tools.</p>
-</div>
-<div id="create-content" class="section level3">
-<h3>Create content</h3>
-<p>Edit the <code>_site.yml</code> file to change the metadata, layout, and theme of your website. Preview Jekyll themes <a href="http://jekyllthemes.org/">here</a> and play around with different options. Themes are easy to change even after you have added content.</p>
-<p>For example, the <code>_site.yml</code> for my cats’ personal website looks like this:</p>
-<pre class="r"><code>name: &quot;cat-website&quot;
-navbar:
-  title: &quot;My cats&#39; website&quot;
-  left:
-    - text: &quot;Home&quot;
-      href: index.html
-  right: 
-    - icon: fa-envelope fa-lg
-      href: mailto:&lt;cats@catemail.com&gt;
-    - icon: fa-github fa-lg
-      href: http://github.com/&lt;YOUR_GH_NAME&gt;/
-output:
-  html_document:
-    theme: darkly</code></pre>
-<p>Choose a default theme from <a href="https://bootswatch.com/3/" class="uri">https://bootswatch.com/3/</a> for easy implementation.</p>
-<p>Edit and create <code>.Rmd</code> files that contain your website content, which will produce the html pages of your website when you knit them.</p>
-<p>For example, the <code>index.Rmd</code> file for my cats’ personal website homepage looks like this:</p>
-<pre class="r"><code>---
-title: &quot;My cats have a website!&quot;
----
+<div id="reformatting-images" class="section level2">
+<h2>Reformatting Images</h2>
+<p>Some of the Herbarium Sheets were received and stored in the .tiff file format. In order to save space and have our data in one file format we will be converting them to .jpg.</p>
+<pre class="r"><code>import os
+from PIL import Image
 
-This is John.
-
-&lt;img src=&quot;files/john.jpg&quot; style=&quot;width:50%&quot;&gt;
-
-This is Pete.
-
-&lt;img src=&quot;files/pete.jpg&quot; style=&quot;width:50%&quot;&gt;
-
-They are brothers!
-
-&lt;img src=&quot;files/brother_kitties.jpg&quot; style=&quot;width:50%&quot;&gt;</code></pre>
-<p>In this example the image files are stored in a subdirectory of YOUR_GH_NAME.github.io named “files”.</p>
-<p>Once you have your content written and the layout setup, on the Build tab in RStudio, select “Build Website”:</p>
-<p><img src="img/build.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-<p>Now your local directory contains all of the files needed for your website:</p>
-<p><img src="img/directory.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-<p>And here’s what the resulting website looks like, hi kitties!</p>
-<p><img src="img/example-website-finished.png" style="border: #A9A9A9 1px solid; width:75%"></p>
+# Assuming the current directory has the images. 
+yourpath = os.getcwd()
+# Extracting file names in current directory. 
+for root, dirs, files in os.walk(yourpath, topdown=False):
+  # Looping through filenames
+  for name in files:
+    print(os.path.join(root, name))
+      
+    # If file ends in tif, check to see if it&#39;s already converted.
+    if os.path.splitext(os.path.join(root, name))[1].lower() == &quot;.tif&quot;:
+      if os.path.isfile(os.path.splitext(os.path.join(root, name))[0] + &quot;.jpg&quot;):
+        print(&quot;A jpeg file already exists for %s&quot; % name)
+          # If a jpeg is *NOT* present, create one from the tiff.
+      else:
+        outfile = os.path.splitext(os.path.join(root, name))[0] + &quot;.jpg&quot;
+        try:
+          im = Image.open(os.path.join(root, name))
+          print(&quot;Generating jpeg for %s&quot; % name)
+          im.thumbnail(im.size)
+          im.save(outfile, &quot;JPEG&quot;, quality=100)
+        except e:
+          print(e)</code></pre>
 </div>
-<div id="deploy-website" class="section level3">
-<h3>Deploy website</h3>
-<p>Basic approach:</p>
-<ul>
-<li>Select “Upload files” from the main page of your GitHub repo:</li>
-</ul>
-<p><img src="img/uploadbutton.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-<ul>
-<li>And simply drag or select the files from the local repository:</li>
-</ul>
-<p><img src="img/upload.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-<p>Advanced approach (recommended):</p>
-<ul>
-<li>use Git from the shell, from a Git client, or from within RStudio (another great reason to use an R Project!)</li>
-</ul>
-<p><img src="img/rstudiogit.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-<ul>
-<li>But this is not a Git/GitHub tutorial. If you want to learn more about Git/GitHub, which I encourage you to do, here’s a great resource to get you started: <a href="http://happygitwithr.com/">http://happygitwithr.com/</a></li>
-</ul>
+<div id="applying-the-initial-segmentation" class="section level2">
+<h2>Applying the Initial Segmentation</h2>
+<p>The code for the initial segmentation used in the article by Alexander White, Rebecca Dikow, et al. can be found <a href="https://github.com/sidatasciencelab/fern_segmentation/blob/master/segmentation_code.ipynb">here</a>. This initial code relies on an a python wrapper for OpenCV(Computer Vision) called cv2. The code simply performs Otsu’s biniarization method to create an initial mask.</p>
+<div id="otsus-binarization-method" class="section level3">
+<h3>Otsu’s Binarization Method</h3>
+<p>Otsu’s Method finds a threshold for making the mask, which minimized the intra-class variance(variance between the two black and white classes.) Here is an example of how it works. First we take the grayscale image then create a frequency histogram of it’s pixel intensity values(1-255). We scan through this frequency histogram, everything to the left of our scan is put into one class everything to the right of our scan is put into another class. At each iteration we compute a cost function which is a weighted sum of the variances in each class,</p>
+<p><span class="math display">\[\sigma^2_w(t) = w_1(t)\sigma^2_1(t) + w_2(t)\sigma^2_2(t).\]</span> <span class="math display">\[w_1(t) = \sum_{i = 1}^{t - 1}p(i)\]</span> <span class="math display">\[w_2(t) = \sum_{i = t}^{255}p(i)\]</span></p>
+<p>Since there are only two classes, namely black and white we know that the threshold which minimizes intra-class variance, must also maximize inter-class variance. Which is computed with the following,</p>
+<p><span class="math display">\[ \sigma^2_b(t) = w_1(t)w_2(t)\left(\mu_1(t)- \mu_2(t)\right)^2.\]</span></p>
 </div>
-<div id="custom-domains" class="section level3">
-<h3>Custom domains</h3>
-<p>The default is for your site to be hosted at <a href="http://YOUR_GH_NAME.github.io" class="uri">http://YOUR_GH_NAME.github.io</a>, but you can add a custom domain name as well. There are two steps:</p>
-<ol style="list-style-type: decimal">
-<li>In your GitHub repository YOUR_GH_NAME.github.io, go to Settings &gt; GitHub pages. Type your domain name in the box under Custom domain and hit Save.</li>
-</ol>
-<p><img src="img/domain.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-<ol start="2" style="list-style-type: decimal">
-<li>Add a CNAME file to your GitHub repsitory YOUR_GH_NAME.github.io.</li>
-</ol>
-<p>It will appear like this in your repository:</p>
-<p><img src="img/cname1.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-<p>And inside the file you will simply have your domain name:</p>
-<p><img src="img/cname2.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-</div>
-</div>
-<div id="package-websites" class="section level2">
-<h2>Package websites</h2>
-<p>An example from the <a href="http://www.emilyzabor.com/ezfun/">website</a> for my package <code>ezfun</code>:</p>
-<p><img src="img/package.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-<p>Use Hadley Wickham’s great package <code>pkgdown</code> to easily build a website from your package that is hosted on GitHub. Details of <code>pkgdown</code> can be found on <a href="http://pkgdown.r-lib.org/">the pkgdown website</a>, which was also created using <code>pkgdown</code>.</p>
-<p>This assumes you already have an R package with a local directory and a GitHub repository.</p>
-<p>From within your package directory run:</p>
-<pre class="r"><code>devtools::install_github(&quot;hadley/pkgdown&quot;)
-pkgdown::build_site()</code></pre>
-<ul>
-<li><p>This will add a folder called <code>docs</code> to the local directory for your package</p></li>
-<li><p>Upload/push these changes to the GitHub repository for your package</p></li>
-<li><p>In the GitHub repository for your package go to Settings &gt; GitHub pages. Select “master branch/docs folder” as the source and hit Save</p></li>
-</ul>
-<p><img src="img/ghsource.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-<ul>
-<li><p>The page will be added as to your personal website as YOUR_GH_NAME.github.io/repo_name</p>
-<ul>
-<li>The Home page of the site will be pulled from the README file on your package repository</li>
-<li>The Reference page of the site lists the included functions with their description</li>
-<li>Each function can be clicked through to see the help page, if any</li>
-<li>Would also build pages for any available vignettes</li>
-</ul></li>
-</ul>
-<p>And you’re done, it’s that easy.</p>
-</div>
-<div id="project-websites" class="section level2">
-<h2>Project websites</h2>
-<p>You can create a website for a non-package repository as well. For example, I have <a href="http://www.emilyzabor.com/tutorials/">a page</a> on my website linking to the repository in which this tutorial is stored.</p>
-<p><img src="img/project.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-<div id="local-setup-1" class="section level3">
-<h3>Local setup</h3>
-<p>From within the local directory of the project of interest:</p>
-<ol style="list-style-type: decimal">
-<li>Create a <code>_site.yml</code> and <code>index.Rmd</code> file in your new directory</li>
-<li>Edit these files to create content and manage layout, as before for personal websites</li>
-</ol>
-</div>
-<div id="github-setup-1" class="section level3">
-<h3>GitHub setup</h3>
-<ul>
-<li><p>Upload/push these new files to the GitHub repository for your project</p></li>
-<li><p>Enable GitHub pages for the repository by going to Settings &gt; GitHub Pages, where you’ll select the “master branch” folder and hit Save</p></li>
-</ul>
-<p><img src="img/ghpages.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-</div>
-</div>
-<div id="blogs" class="section level2">
-<h2>Blogs</h2>
-<p>R Markdown websites are simple to create and deploy, but can become cumbersome if you make frequent updates or additions to the website, as in the case of a blog. Luckily, the R package <code>blogdown</code> exists just for this purpose. <code>blogdown</code> is an R package that allows you to create static websites, which means that the deployed version of the website only consists of JavaScript, HTML, CSS, and images. Luckily the <code>blogdown</code> package makes it so that you don’t have to know any of those things to create a beautiful website for your blog, powered by Hugo.</p>
-<p>For a complete resource on using the <code>blogdown</code> website, checkout this <a href="https://bookdown.org/yihui/blogdown/">short blogdown book</a>.</p>
-<p>I don’t have a personal blog, so let’s look at the website I built to feature the events and blog of the <a href="http://www.rladiesnyc.org/">R-Ladies NYC</a> organization as an example.</p>
-<p><img src="img/rladiesnychome.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-<div id="setup" class="section level3">
-<h3>Setup</h3>
-<p>The first three steps are similar to those from creating a basic R Markdown website:</p>
-<ol style="list-style-type: decimal">
-<li>Create a GitHub repository named YOUR_GH_NAME.github.io, where YOUR_GH_NAME is your GitHub username, initialized with a README file</li>
-<li>Clone the GitHub repo to a local directory with the same name</li>
-<li>Add an R Project to the local directoroy</li>
-</ol>
-<p>Next we get started with <code>blogdown</code>.</p>
-<ol start="4" style="list-style-type: decimal">
-<li>Install <code>blogdown</code> and Hugo</li>
-</ol>
-<pre class="r"><code>install.packages(&quot;blogdown&quot;)
-blogdown::install_hugo()</code></pre>
-<ol start="5" style="list-style-type: decimal">
-<li><p>Choose a <a href="https://themes.gohugo.io/">theme</a> and find the link to the theme’s GitHub repository. In this case themes aren’t quite as easy to change as with basic R Markdown websites, so choose carefully.</p></li>
-<li><p>Within your project session, generate a new site. The option <code>theme_example = TRUE</code> will obtain the files for an example site that you can then customize for your needs. Below “user/repo” refers to the GitHub username and GitHub repository for your selected theme.</p></li>
-</ol>
-<pre class="r"><code>blogdown::new_site(theme = &quot;user/repo&quot;, theme_example = TRUE)</code></pre>
-<p>This will generate all of the file structure for your new blog.</p>
-<p><img src="img/blogdirectory.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-<p>After this is complete, you should quit and then reopen the project. Upon reopening, RStudio will recognize the project as a website.</p>
-</div>
-<div id="customizing-the-appearance" class="section level3">
-<h3>Customizing the appearance</h3>
-<p>Make changes to the <code>config.toml</code> file (equivalent to the <code>_site.yml</code> from basic R Markdown websites) to change the layout and appearance of your website. The available features of the <code>config.toml</code> file will differ depending on your theme, and most theme examples come with a well annotated <code>config.toml</code> that you can use as a template.</p>
-<p>Once you have customized your website features, click on the RStudio addin “Serve Site” to preview the site locally.</p>
-<p><img src="img/servesite.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-</div>
-<div id="writing-a-new-blog-post" class="section level3">
-<h3>Writing a new blog post</h3>
-<p>There are several ways to create a new post for your site, but the easiest is using the RStudio addin “New Post”:</p>
-<p><img src="img/newpost.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-<p>This opens a pop-up where you can enter the meta-data for a new post:</p>
-<p><img src="img/newpostbox.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-<p>In addition to setting the Title, Author and Date of the post, you can additionally create categories, which will organize your posts in folders, and can add tags to posts, which can make them searchable within your site’s content. Be aware that the functioning of these features will vary by theme. Dates can be in the future to allow future release of a post.</p>
-<p>Notice at the bottom that you can select whether to use a regular markdown (<code>.md</code>) or R markdown (<code>.Rmd</code>) file. <code>.Rmd</code> files will have to be rendered before generating html pages so it is best practice to limit their use to cases where R code is included.</p>
-<p>A file name and slug will automatically be generated based on the other metadata. The slug is a URL friendly title of your post.</p>
-<p><img src="img/newpostboxfilled.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-</div>
-<div id="hosting" class="section level3">
-<h3>Hosting</h3>
-<p>A <code>blogdown</code> site is a bit more cumbersome both to build and to host on GitHub as compared to a regular R Markdown website, and as compared to what I described above.</p>
-<p><em>Problem 1</em>: Because it is a static site, upon building, the files needed to generate the site online are automatically created in a separate subdirectory called <code>public</code> within your local directory. However this will cause problems with GitHub hosting since the files to host need to be in the local YOUR_GH_NAME.github.io directory</p>
-<p>My solution:</p>
-<ol style="list-style-type: decimal">
-<li>Maintain separate directories for the source files (I named this directory “source”) and for the static files (the directory YOUR_GH_NAME.github.io) that will be generated on build. The “source” folder is where your R project and <code>config.toml</code> files will live.</li>
-</ol>
-<p><img src="img/blogfolders.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-<ol start="2" style="list-style-type: decimal">
-<li>In your <code>config.toml</code> use the option <code>publishDir =</code> to customize <code>blogdown</code> to publish to the YOUR_GH_NAME.github.io folder, rather than to the default local location</li>
-</ol>
-<p><img src="img/publishdir.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-<p><em>Problem 2</em>: GitHub defaults to using Jekyll with website content, and this needs to be disabled since <code>blogdown</code> sites are built with Hugo</p>
-<p>To get around this, you need to include an empty file named <code>.nojekyll</code> in your GitHub repo YOUR_GH_NAME.github.io, prior to publishing.</p>
-<p><img src="img/nojekyll.png" style="border: #A9A9A9 1px solid; width:75%"></p>
-</div>
-</div>
-<div id="additional-resources" class="section level2">
-<h2>Additional resources</h2>
-<p>A compiled list of the additional resources/links presented throughout this tutorial:</p>
-<ul>
-<li><a href="http://rmarkdown.rstudio.com/rmarkdown_websites.html">http://rmarkdown.rstudio.com/rmarkdown_websites.html</a>: an overview of R Markdown website basics</li>
-<li><a href="http://happygitwithr.com/">http://happygitwithr.com/</a>: an introduction to Git/GitHub</li>
-<li><a href="http://pkgdown.r-lib.org/">http://pkgdown.r-lib.org/</a>: Hadley Wickham’s <code>pkgdown</code> website</li>
-<li><a href="https://bookdown.org/yihui/blogdown/">https://bookdown.org/yihui/blogdown/</a>: Yihui Xie’s blogdown book</li>
-<li><a href="https://themes.gohugo.io/">https://themes.gohugo.io/</a>: Hugo themes for use with your <code>blogdown</code> website</li>
-</ul>
-</div>
-<div id="demo" class="section level2">
-<h2>Demo</h2>
 </div>
 
 

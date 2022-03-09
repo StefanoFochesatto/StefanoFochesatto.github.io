@@ -6,4 +6,4 @@ pagetitle: "Stefano Fochesatto"
 <link rel="stylesheet" href="styles.css" type="text/css">
 <link rel="stylesheet" href="academicicons/css/academicons.min.css"/>
 
-## Discussions surrounding my coursework and class projects will go here
+## Discussions surrounding my coursework and class projects will go here. Under Construction
