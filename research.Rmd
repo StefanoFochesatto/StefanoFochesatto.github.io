@@ -74,7 +74,7 @@ Since there are only two classes, namely black and white we know that the thresh
 
 $$ \sigma^2_b(t) = w_1(t)w_2(t)\left(\mu_1(t)- \mu_2(t)\right)^2.$$
 
-## Otsu's Binarization Demo
+## Otsu's Binarization Demo Test Test
 ```{r}
 library(shiny)
 knitr::include_app("https://stefanofochesatto.shinyapps.io/otsudemo/")

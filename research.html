@@ -391,6 +391,31 @@ div.tocify {
 <div id="section-reformatting-images" class="section level2">
 <h2>Reformatting Images</h2>
 <p>Some of the Herbarium Sheets were received and stored in the .tiff file format. In order to save space and have our data in one file format we will be converting them to .jpg.</p>
+<pre class="python"><code>import os
+from PIL import Image
+
+# Assuming the current directory has the images. 
+yourpath = os.getcwd()
+# Extracting file names in current directory. 
+for root, dirs, files in os.walk(yourpath, topdown=False):
+  # Looping through filenames
+  for name in files:
+    print(os.path.join(root, name))
+      
+    # If file ends in tif, check to see if it&#39;s already converted.
+    if os.path.splitext(os.path.join(root, name))[1].lower() == &quot;.tif&quot;:
+      if os.path.isfile(os.path.splitext(os.path.join(root, name))[0] + &quot;.jpg&quot;):
+        print(&quot;A jpeg file already exists for %s&quot; % name)
+          # If a jpeg is *NOT* present, create one from the tiff.
+      else:
+        outfile = os.path.splitext(os.path.join(root, name))[0] + &quot;.jpg&quot;
+        try:
+          im = Image.open(os.path.join(root, name))
+          print(&quot;Generating jpeg for %s&quot; % name)
+          im.thumbnail(im.size)
+          im.save(outfile, &quot;JPEG&quot;, quality=100)
+        except e:
+          print(e)</code></pre>
 </div>
 <div id="section-applying-the-initial-segmentation" class="section level2">
 <h2>Applying the Initial Segmentation</h2>
@@ -405,7 +430,10 @@ div.tocify {
 </div>
 <div id="section-otsus-binarization-demo" class="section level2">
 <h2>Otsu’s Binarization Demo</h2>
-<p>&lt;iframe src=“<a href="https://gallery.shinyapps.io/064-telephones-by-region?showcase=0" class="uri">https://gallery.shinyapps.io/064-telephones-by-region?showcase=0</a>”, style=“border:none; width: 900px; height: 500px”&gt; </iframe></p>
+<pre class="r"><code>library(shiny)
+knitr::include_app(&quot;https://stefanofochesatto.shinyapps.io/otsudemo/&quot;)</code></pre>
+<iframe src="https://stefanofochesatto.shinyapps.io/otsudemo/?showcase=0" width="672" height="400px" data-external="1">
+</iframe>
 </div>
 
 
