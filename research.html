@@ -226,11 +226,11 @@ $(document).ready(function () {
 
 <style type="text/css">
 
-#TOC {
+#section-TOC {
   margin: 25px 0px 20px 0px;
 }
 @media (max-width: 768px) {
-#TOC {
+#section-TOC {
   position: relative;
   width: 100%;
 }
@@ -299,7 +299,7 @@ div.tocify {
 <!-- setup 3col/9col grid for toc_float and main content  -->
 <div class="row">
 <div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
+<div id="section-TOC" class="tocify">
 </div>
 </div>
 
@@ -366,7 +366,7 @@ div.tocify {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div id="header">
+<div id="section-header">
 
 
 
@@ -376,11 +376,11 @@ div.tocify {
 
 
 <p><link rel="stylesheet" href="styles.css" type="text/css"> <link rel="stylesheet" href="academicicons/css/academicons.min.css"/></p>
-<div id="introduction" class="section level2">
+<div id="section-introduction" class="section level2">
 <h2>Introduction</h2>
 <p>This Section still needs an introduction/ like an abstract.</p>
 </div>
-<div id="building-the-segmentation-masks" class="section level2">
+<div id="section-building-the-segmentation-masks" class="section level2">
 <h2>Building the Segmentation Masks</h2>
 <p>Before we are able to start working on training a model to cluster the images we need to remove any biasing information from the images. This involves creating something called a segmentation mask, which will essentially remove any biasing information involved in capturing the herbarium sheet samples. The way that the mask works is we will create a black and white image, where there is no presence of the plant sample we will color the image black and where there is we will color the image white.</p>
 <p>In terms of biasing information think, camera settings, or any identifying labels. Ideally we want the segmentation mask to still capture all the information that a paleo-botanist would use when delineating species. I’m told that most of the time this information if found almost entirely in the morphology of the leaves.</p>
@@ -388,45 +388,24 @@ div.tocify {
 <p>Mapping out the workflow for building the segmentation masks, consider the following,</p>
 <p><img src="images/SegmentationWorkflow.png" style="width:100%" align="center"></p>
 </div>
-<div id="reformatting-images" class="section level2">
+<div id="section-reformatting-images" class="section level2">
 <h2>Reformatting Images</h2>
 <p>Some of the Herbarium Sheets were received and stored in the .tiff file format. In order to save space and have our data in one file format we will be converting them to .jpg.</p>
-<pre class="r"><code>import os
-from PIL import Image
-
-# Assuming the current directory has the images. 
-yourpath = os.getcwd()
-# Extracting file names in current directory. 
-for root, dirs, files in os.walk(yourpath, topdown=False):
-  # Looping through filenames
-  for name in files:
-    print(os.path.join(root, name))
-      
-    # If file ends in tif, check to see if it&#39;s already converted.
-    if os.path.splitext(os.path.join(root, name))[1].lower() == &quot;.tif&quot;:
-      if os.path.isfile(os.path.splitext(os.path.join(root, name))[0] + &quot;.jpg&quot;):
-        print(&quot;A jpeg file already exists for %s&quot; % name)
-          # If a jpeg is *NOT* present, create one from the tiff.
-      else:
-        outfile = os.path.splitext(os.path.join(root, name))[0] + &quot;.jpg&quot;
-        try:
-          im = Image.open(os.path.join(root, name))
-          print(&quot;Generating jpeg for %s&quot; % name)
-          im.thumbnail(im.size)
-          im.save(outfile, &quot;JPEG&quot;, quality=100)
-        except e:
-          print(e)</code></pre>
 </div>
-<div id="applying-the-initial-segmentation" class="section level2">
+<div id="section-applying-the-initial-segmentation" class="section level2">
 <h2>Applying the Initial Segmentation</h2>
 <p>The code for the initial segmentation used in the article by Alexander White, Rebecca Dikow, et al. can be found <a href="https://github.com/sidatasciencelab/fern_segmentation/blob/master/segmentation_code.ipynb">here</a>. This initial code relies on an a python wrapper for OpenCV(Computer Vision) called cv2. The code simply performs Otsu’s biniarization method to create an initial mask.</p>
-<div id="otsus-binarization-method" class="section level3">
+<div id="section-otsus-binarization-method" class="section level3">
 <h3>Otsu’s Binarization Method</h3>
 <p>Otsu’s Method finds a threshold for making the mask, which minimized the intra-class variance(variance between the two black and white classes.) Here is an example of how it works. First we take the grayscale image then create a frequency histogram of it’s pixel intensity values(1-255). We scan through this frequency histogram, everything to the left of our scan is put into one class everything to the right of our scan is put into another class. At each iteration we compute a cost function which is a weighted sum of the variances in each class,</p>
 <p><span class="math display">\[\sigma^2_w(t) = w_1(t)\sigma^2_1(t) + w_2(t)\sigma^2_2(t).\]</span> <span class="math display">\[w_1(t) = \sum_{i = 1}^{t - 1}p(i)\]</span> <span class="math display">\[w_2(t) = \sum_{i = t}^{255}p(i)\]</span></p>
 <p>Since there are only two classes, namely black and white we know that the threshold which minimizes intra-class variance, must also maximize inter-class variance. Which is computed with the following,</p>
 <p><span class="math display">\[ \sigma^2_b(t) = w_1(t)w_2(t)\left(\mu_1(t)- \mu_2(t)\right)^2.\]</span></p>
 </div>
+</div>
+<div id="section-otsus-binarization-demo" class="section level2">
+<h2>Otsu’s Binarization Demo</h2>
+<p>&lt;iframe src=“<a href="https://gallery.shinyapps.io/064-telephones-by-region?showcase=0" class="uri">https://gallery.shinyapps.io/064-telephones-by-region?showcase=0</a>”, style=“border:none; width: 900px; height: 500px”&gt; </iframe></p>
 </div>
 
 
@@ -453,7 +432,7 @@ $(document).ready(function () {
 
 <script>
 $(document).ready(function () {
-  window.buildTabsets("TOC");
+  window.buildTabsets("section-TOC");
 });
 
 $(document).ready(function () {
@@ -491,7 +470,7 @@ $(document).ready(function ()  {
     options.smoothScroll = true;
 
     // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
+    var toc = $("#section-TOC").tocify(options).data("toc-tocify");
 });
 </script>
 
