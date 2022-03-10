@@ -9,7 +9,7 @@ pagetitle: "Stefano Fochesatto"
 
 ### Contributed
 
-2022 Mathematics of Machine Learning, Fairbanks, AK: [*Decision Trees Learning from Scratch*](https://github.com/StefanoFochesatto/Homework-Spring-2022/blob/main/Mathematics%20of%20Machine%20Learning/DecisionTreePresentation.pdf)
+2022 Mathematics of Machine Learning, Fairbanks, AK: [*Decision Tree Learning from Scratch*](https://github.com/StefanoFochesatto/Homework-Spring-2022/blob/main/Mathematics%20of%20Machine%20Learning/DecisionTreePresentation.pdf)
 
 2021 History and Philosophy of Mathematics, Fairbanks, AK: [*Approximating Pi; A Brief Study on Approximating Methods*](https://github.com/StefanoFochesatto/MATH-316/blob/main/Approximation%20Pi%20Presentation.pdf)
 
