@@ -1,6 +1,7 @@
 ---
 title: " "
 pagetitle: "Stefano Fochesatto"
+description: "Stefano's Homepage for all coursework, research and code."
 ---
 
 <link rel="stylesheet" href="styles.css" type="text/css">

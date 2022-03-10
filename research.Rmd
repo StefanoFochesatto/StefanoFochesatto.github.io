@@ -5,6 +5,7 @@ output:
         toc: TRUE
         toc_float: TRUE
 runtime: shiny
+description: "Species Delineation from Herbarium Sheet Samples. Unsupervised learning research for developing workflows in Paleo-Botony."
 ---
 
 <link rel="stylesheet" href="styles.css" type="text/css">
