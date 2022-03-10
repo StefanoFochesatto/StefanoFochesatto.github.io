@@ -6,4 +6,12 @@ pagetitle: "Stefano Fochesatto"
 <link rel="stylesheet" href="styles.css" type="text/css">
 <link rel="stylesheet" href="academicicons/css/academicons.min.css"/>
 
-## Slides for any talks, or presentations, projects, and posters go here. Under Construction 
+
+### Contributed
+
+2022 Mathematics of Machine Learning, Fairbanks, AK: [*Decision Trees Learning from Scratch*](https://github.com/StefanoFochesatto/Homework-Spring-2022/blob/main/Mathematics%20of%20Machine%20Learning/DecisionTreePresentation.pdf)
+
+2021 History and Philosophy of Mathematics, Fairbanks, AK: [*Approximating Pi; A Brief Study on Approximating Methods*](https://github.com/StefanoFochesatto/MATH-316/blob/main/Approximation%20Pi%20Presentation.pdf)
+
+2020 Senior Seminar; Graph Theory, Fairbanks, AK: [*The Art Gallery Problem; Orthogonal Art Galleries*](https://github.com/StefanoFochesatto/MATH-490/blob/main/Coursework/Final%20Presentation/Final_Presentation.pdf)
+
