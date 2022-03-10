@@ -1,4 +1,4 @@
-#
+
 # This is a Shiny web application. You can run the application by clicking
 # the 'Run App' button above.
 #
@@ -8,41 +8,41 @@
 #
 
 library(shiny)
+library(imager)
+library(bslib)
 
+img <- grayscale(load.image('example.jpg'))
 # Define UI for application that draws a histogram
 ui <- fluidPage(
-
-    # Application title
-    titlePanel("Old Faithful Geyser Data"),
-
-    # Sidebar with a slider input for number of bins 
-    sidebarLayout(
-        sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
-        ),
-
-        # Show a plot of the generated distribution
-        mainPanel(
-           plotOutput("distPlot")
-        )
+  theme = bs_theme(version = 3, bootswatch = "readable", base_font = font_google('Roboto')),
+    # Show a plot of the generated distribution
+  tags$div(
+    style="margin-top:25px;",
+    mainPanel( align = 'center', fluid = FALSE, width = '100%',
+       sliderInput(inputId = 'thx', label = 'Binarization Threshold',  min = 0, max = 255, value = 100, width = '80%'),
+       fluidRow(
+         splitLayout(cellWidths = c("50%", "50%"),
+       plotOutput(outputId = "OrigImage",  width = '100%'),
+       plotOutput(outputId = "ThreshImage",  width = '100%')
+         )
+       )
     )
 )
+)
+
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-
-    output$distPlot <- renderPlot({
-        # generate bins based on input$bins from ui.R
-        x    <- faithful[, 2]
-        bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-        # draw the histogram with the specified number of bins
-        hist(x, breaks = bins, col = 'darkgray', border = 'white')
-    })
+  output$OrigImage <- renderPlot({
+    plot(img, axes = FALSE)
+  })
+  
+  output$ThreshImage <- renderPlot({
+    thx <- input$thx/255
+    imgTHX <- threshold(img, thr = thx)
+    plot(imgTHX, axes = FALSE)
+  })
+  
 }
 
 # Run the application 

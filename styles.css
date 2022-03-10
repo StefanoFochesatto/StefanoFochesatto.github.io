@@ -42,10 +42,9 @@ img-circle {
 }
 
 a {
-color: #4582ec;
+  color: #4582ec;
     background-color: transparent;
     font-family: "Raleway","Helvetica Neue",Helvetica,Arial,sans-serif;
         font-size: 16px; 
-        font-weight: normal;!important
-}
+        font-weight: normal;!important;}
 

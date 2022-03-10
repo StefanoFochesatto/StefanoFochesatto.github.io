@@ -426,14 +426,90 @@ for root, dirs, files in os.walk(yourpath, topdown=False):
 <p><span class="math display">\[\sigma^2_w(t) = w_1(t)\sigma^2_1(t) + w_2(t)\sigma^2_2(t).\]</span> <span class="math display">\[w_1(t) = \sum_{i = 1}^{t - 1}p(i)\]</span> <span class="math display">\[w_2(t) = \sum_{i = t}^{255}p(i)\]</span></p>
 <p>Since there are only two classes, namely black and white we know that the threshold which minimizes intra-class variance, must also maximize inter-class variance. Which is computed with the following,</p>
 <p><span class="math display">\[ \sigma^2_b(t) = w_1(t)w_2(t)\left(\mu_1(t)- \mu_2(t)\right)^2.\]</span></p>
+<p>Here is some python code for computing the Otsu Binarization threshold.</p>
+<pre class="python"><code>import cv2 #openCV for image processing
+import numpy as np
+
+## Area for Otsu Binarization Demo
+orig = cv2.imread(&quot;example.jpg&quot;, cv2.IMREAD_GRAYSCALE)
+### Generating the greyscale value histogram
+freq = np.zeros(256)
+for i in range(len(orig)):
+    for j in range(len(orig[0])):
+        freq[orig[i,j]] += 1
+
+### Normalizing to get probability dist. 
+total = sum(freq)
+prob = freq/total
+
+## Applying Otsu&#39;s binarization algorithm to find the threshold which maximizes inter-class variance, 
+inter_variance = np.zeros(255)
+for i in range(1,256):
+    w_0 = sum(prob[0:i-1]) 
+    w_1 = sum(prob[i:255])
+    if (w_0 == 0 or w_1 == 0):
+        inter_variance[i-1] = 0
+    else:
+        mu_0 = sum(range(1,256)[1:i-1]*prob[1:i-1])/w_0
+        mu_1 = sum(range(1,256)[i:255]*prob[i:255])/w_1
+        inter_variance[i-1] = w_0*w_1*(mu_0 - mu_1)**2
+
+## Pulling threshold where inter_variance is maximized
+Otsu_Thresh = np.argmax(inter_variance)
+print(str(&#39;This is the Otsu threshold computed by the novel implemintation: &#39; + str(Otsu_Thresh)))</code></pre>
 </div>
 </div>
 <div id="section-otsus-binarization-demo" class="section level2">
 <h2>Otsu’s Binarization Demo</h2>
-<pre class="r"><code>library(shiny)
-knitr::include_app(&quot;https://stefanofochesatto.shinyapps.io/otsudemo/&quot;)</code></pre>
-<iframe src="https://stefanofochesatto.shinyapps.io/otsudemo/?showcase=0" width="672" height="400px" data-external="1">
+<iframe src="https://stefanofochesatto.shinyapps.io/otsudemo/?showcase=0" width="100%" height="550px" data-external="1">
 </iframe>
+</div>
+<div id="section-generating-inital-mask-code" class="section level2">
+<h2>Generating Inital Mask (Code)</h2>
+<pre class="python"><code>import cv2 #openCV for image processing
+import numpy as np
+
+#### Full Script For Initial segmentation mask 
+path = &#39;YOUR_PATH&#39; ##Supply Full Path to images directory
+
+#### Directory Management
+os.chdir(path) #Change the working directory to the image directory
+
+Imagelist = [] #Pull the current list of files in image directory
+for file in os.listdir(path):
+    if file.endswith(&quot;.jpg&quot;): # Herbarium Sheets are in jpg format
+        Imagelist.append(file)
+
+
+
+## Creating Directory for each mask. 
+dir_fore = &#39;Foreground_Masks&#39;
+os.mkdir(os.path.join(path, dir_fore))
+dir_back = &#39;Background_Masks&#39;
+os.mkdir(os.path.join(path, dir_back))
+
+
+for i in Imagelist:
+    os.chdir(path) # We have to set the path everytime since cv2 can&#39;t handle relative paths without it.
+    currentImage = cv2.imread(i, cv2.IMREAD_GRAYSCALE) # Reading in the current image
+    
+    # Applying the threshold
+    threshImage = copy.deepcopy(currentImage)
+    ret, thresh = cv2.threshold(threshImage,0,255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)
+    
+    # Creating the masks
+    mask_fore = copy.deepcopy(currentImage)
+    mask_fore = np.where((currentImage).astype(np.uint8) &gt; ret, 0, 255)  
+    image_fore = Image.fromarray((mask_fore).astype(np.uint8))
+    os.chdir(str(path+&#39;/Foreground_Masks&#39;))
+    image_fore.save(str(i),&quot;JPEG&quot;) 
+    
+    
+    mask_back = copy.deepcopy(currentImage)
+    mask_back = np.where((currentImage).astype(np.uint8) &gt; ret, 255, 0) 
+    image_back = Image.fromarray((mask_back).astype(np.uint8))
+    os.chdir(str(path+&#39;/Background_Masks&#39;))
+    image_back.save(str(i),&quot;JPEG&quot;)     </code></pre>
 </div>
 
 

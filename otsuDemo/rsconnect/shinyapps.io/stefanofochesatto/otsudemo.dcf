@@ -5,7 +5,10 @@ account: stefanofochesatto
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 5819764
-bundleId: 5664192
+bundleId: 5665126
 url: https://stefanofochesatto.shinyapps.io/otsudemo/
-when: 1646871448.22102
-lastSyncTime: 1646871448.22104
+when: 1646895697.23919
+lastSyncTime: 1646895697.23921
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: herbimg.jpg
