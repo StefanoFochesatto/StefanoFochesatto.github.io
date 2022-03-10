@@ -13,7 +13,7 @@ a nice bouding border for your geoR object.
 [*get_borders()*](https://github.com/StefanoFochesatto/Homework-Spring-2022/blob/main/Spatial%20Statistics/get_borders.r) *modified from Dr.Margaret Short's Code*
 
 The function takes three parameters, my.lonlat, concavity_param, and frac. 
-The my.lonlat parameter is simply a 2 column matrix of your lon,lat data. The concavity_param argument is a relative measure of concavity. When set it to 1 we get a concave hull, for sufficiently large concavity_param we get the convex hull. The frac argument extends the border in every direction. The function uses the geoR, concaveman, and rgeos packages. The following is an example, and results.
+The my.lonlat parameter is simply a 2 column matrix of your lon,lat data. The concavity_param argument is a relative measure of concavity. When set to 1 we get a concave hull, for sufficiently large concavity_param we get the convex hull. The frac argument extends the border in every direction. The function uses the geoR, concaveman, and rgeos packages. The following is an example, and results.
 
 
 ```{r, eval=FALSE}
