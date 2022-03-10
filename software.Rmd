@@ -6,5 +6,48 @@ pagetitle: "Stefano Fochesatto"
 <link rel="stylesheet" href="styles.css" type="text/css">
 <link rel="stylesheet" href="academicicons/css/academicons.min.css"/>
 
+### Custom Borders for 'geoR' Package Objects.
+The following *get_borders(my.lonlat, concavity_param, frac)* function finds the concave hull of your geoR data object, and generates 
+a nice bouding border for your geoR object. 
 
-## This will contain any code or packages that I've worked on. Under Construction This will contain my get_borders function
+[*get_borders()*](https://github.com/StefanoFochesatto/Homework-Spring-2022/blob/main/Spatial%20Statistics/get_borders.r) *modified from Dr.Margaret Short's Code*
+
+The function takes three parameters, my.lonlat, concavity_param, and frac. 
+The my.lonlat parameter is simply a 2 column matrix of your lon,lat data. The concavity_param argument is a relative measure of concavity. When set it to 1 we get a concave hull, for sufficiently large concavity_param we get the convex hull. The frac argument extends the border in every direction. The function uses the geoR, concaveman, and rgeos packages. The following is an example, and results.
+
+
+```{r, eval=FALSE}
+install.packages(c("geoR", "concaveman", "rgeos"))
+library(geoR)
+library(concaveman)
+library(rgeos)
+
+source("get_borders.r") # or copy and paste directly into RStudio
+
+## Generating Data
+set.seed(5834)
+n <- 14
+lons <- runif(n)
+lats <- runif(n)
+yyy <- rnorm(n)
+## Creating geoR object
+mygeo <- as.geodata(cbind(lons,lats,yyy))
+## Custom Border
+mygeo$borders <- get.borders(cbind(lons,lats), concavity_param = 1, frac = .15)
+
+## Plotting
+plot(mygeo)
+
+```
+
+
+<img src="images/Example.png" style="width:60%; border: 2px solid #4582ec;
+                                                border-radius: 4px;
+                                                border-radius: 8px" align="center">
+                                                
+                                                
+<img src="images/image.png" style="width:60%; border: 2px solid #4582ec;
+                                                border-radius: 4px;
+                                                border-radius: 8px" align="center">
+                                              
+                                              
