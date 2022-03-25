@@ -2,6 +2,7 @@
 title: " "
 pagetitle: "Stefano Fochesatto"
 description: "Stefano's Homepage for all coursework, research and code."
+google-site-verification: "vuFXR67GyTKC3-Wjjug31uv_lIe-sxOLnk30LXPC2n4"
 ---
 
 <link rel="stylesheet" href="styles.css" type="text/css">
@@ -24,5 +25,12 @@ revolves around applying machine learning and computer vision on herbarium sheet
 
 My research interests include numerical analysis, machine learning, and graph theory.
 </font>
+
+
+
+
+<meta name="google-site-verification" content="vuFXR67GyTKC3-Wjjug31uv_lIe-sxOLnk30LXPC2n4" />
+
+
 
 
