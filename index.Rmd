@@ -4,10 +4,15 @@ pagetitle: "Stefano Fochesatto"
 description: "Stefano's Homepage for all coursework, research and code."
 google-site-verification: "vuFXR67GyTKC3-Wjjug31uv_lIe-sxOLnk30LXPC2n4"
 ---
+```{r echo=FALSE, eval=TRUE, warning=FALSE,message=FALSE}
+library(metathis);
+meta() %>%
+  meta_name("google-site-verification" = "dSx33pirLBBkRYQTzgbCqcyn0MPf0X2aJMikpWvo0Y0")
+```
 
 <link rel="stylesheet" href="styles.css" type="text/css">
 <link rel="stylesheet" href="academicicons/css/academicons.min.css"/>
-
+<meta name="google-site-verification" content="dSx33pirLBBkRYQTzgbCqcyn0MPf0X2aJMikpWvo0Y0"/> </meta>
 <img src="images/profile.jpg" style="width:40%; border: 2px solid #4582ec;
                                                 border-radius: 4px; 
                                                 padding: 5px; 
@@ -26,11 +31,7 @@ revolves around applying machine learning and computer vision on herbarium sheet
 My research interests include numerical analysis, machine learning, and graph theory.
 </font>
 
-```{r echo=FALSE, eval=TRUE, warning=FALSE,message=FALSE}
-library(metathis);
-meta() %>%
-  meta_name("google-site-verification" = "vuFXR67GyTKC3-Wjjug31uv_lIe-sxOLnk30LXPC2n4")
-```
+
 
 
 
