@@ -7,4 +7,4 @@ pagetitle: "Stefano Fochesatto"
 <link rel="stylesheet" href="academicicons/css/academicons.min.css"/>
 
 
-## Blog Posts about technology, math, and graduate life will go here. Under Construction,
+## Currently Under Construction. 
