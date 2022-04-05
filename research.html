@@ -11,7 +11,7 @@
 
 
 
-<title>Species Delineation from Herbarium Sheet Samples</title>
+<title>Deep Learning Image Clustering to Aid Species Delimitation Within the Vitis Arizonica Complex.</title>
 
 <script src="site_libs/header-attrs-2.12/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -374,7 +374,7 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Species Delineation from Herbarium Sheet Samples</h1>
+<h1 class="title toc-ignore">Deep Learning Image Clustering to Aid Species Delimitation Within the Vitis Arizonica Complex.</h1>
 
 </div>
 
@@ -382,7 +382,7 @@ div.tocify {
 <p><link rel="stylesheet" href="styles.css" type="text/css"> <link rel="stylesheet" href="academicicons/css/academicons.min.css"/></p>
 <div id="section-introduction" class="section level2">
 <h2>Introduction</h2>
-<p>The goal of this research is to use machine learning to capture and quantify the intuition that botanists have about when considering the further speciation of a particular plant. Specifically we will be applying a convolutional variational autoencoder to a few hundred vitis arizonica specimen. Building this network will allow us to see if there is any sort of clustering among the samples, and if there is we might also be able to find which samples show the greatest difference in morphology. Doing so guide how we choose which samples get sent to undergo genetic sequencing.</p>
+<p>The goal of this research is to use machine learning to capture and quantify the morphological variation inherent in the ~ 370 herbarium specimen images from several herbaria with large Vitis arizonica complex collections (ASU, RSA, and US). Specifically we will be applying a convolutional variational autoencoder to compress these images into a latent space where a further cluster analysis might reveal biological insights that could aid in further species delimitation. Ultimately, these insights could help in an explicit statistical framework for morphological variation, aiding in delineating species by integrating morphological and phylogenetic data.</p>
 </div>
 <div id="section-building-the-segmentation-masks" class="section level2">
 <h2>Building the Segmentation Masks</h2>

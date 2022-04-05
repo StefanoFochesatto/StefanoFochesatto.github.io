@@ -17,3 +17,8 @@ pagetitle: "Stefano Fochesatto"
 
 2020 Senior Seminar; Graph Theory, Fairbanks, AK: [*The Art Gallery Problem; Orthogonal Art Galleries*](https://github.com/StefanoFochesatto/MATH-490/blob/main/Coursework/Final%20Presentation/Final_Presentation.pdf)
 
+### Scheduled
+
+2022 Botany: Plants to the Extreme! Anchorage, AK [Using deep learning image clustering to aid species delimitation within the Vitis arizonica complex.](https://2022.botanyconference.org/engine/search/index.php?func=detail&aid=734)
+
+2022 Botany: Plants to the Extreme! Anchorage, AK [Using deep learning with digitized herbarium specimen image data.](https://2022.botanyconference.org/engine/search/index.php?func=detail&aid=8)

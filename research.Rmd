@@ -1,19 +1,20 @@
 ---
-title: "Species Delineation from Herbarium Sheet Samples"
+title: "Deep Learning Image Clustering to Aid Species Delimitation Within the Vitis Arizonica Complex."
 output: 
     html_document:
         toc: TRUE
         toc_float: TRUE
 runtime: shiny
-description: "Species Delineation from Herbarium Sheet Samples. Unsupervised learning research for developing workflows in Paleo-Botony."
+description: "Using deep learning image clustering to aid species delimitation within the Vitis arizonica complex"
 ---
 
 <link rel="stylesheet" href="styles.css" type="text/css">
 <link rel="stylesheet" href="academicicons/css/academicons.min.css"/>
 
 ## Introduction
-The goal of this research is to use machine learning to capture and quantify the intuition that botanists have about when considering the further speciation of a particular plant. Specifically we will be applying a convolutional variational autoencoder to a few hundred
-vitis arizonica specimen. Building this network will allow us to see if there is any sort of clustering among the samples, and if there is we might also be able to find which samples show the greatest difference in morphology. Doing so guide how we choose which samples get sent to undergo genetic sequencing. 
+ The goal of this research is to use machine learning to capture and quantify the morphological variation inherent in the ~ 370 herbarium specimen images from several herbaria with large Vitis arizonica complex collections (ASU, RSA, and US). Specifically we will be applying a convolutional variational autoencoder to compress these images into a latent space where a further cluster analysis might reveal biological insights that could aid in further species delimitation. Ultimately, these insights could help in an explicit statistical framework for morphological variation, aiding in delineating species by integrating morphological and phylogenetic data. 
+
+
 
 ## Building the Segmentation Masks
 Before we are able to start working on training a model to cluster the images we need to remove any biasing information from the images. This involves creating something called a segmentation mask, which will essentially remove any biasing information involved in capturing the herbarium sheet samples. The way that the mask works is we will create a black and white image, where there is no presence of the plant sample we will color the image black and where there is we will color the image white. 
