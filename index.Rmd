@@ -3,6 +3,7 @@ title: " "
 pagetitle: "Stefano Fochesatto"
 description: "Stefano's Homepage for all coursework, research and code."
 google-site-verification: "vuFXR67GyTKC3-Wjjug31uv_lIe-sxOLnk30LXPC2n4"
+
 ---
 ```{r echo=FALSE, eval=TRUE, warning=FALSE,message=FALSE}
 library(metathis);
@@ -26,7 +27,7 @@ meta() %>%
 <font size='4'>
 I am a graduate student at the University of Alaska Fairbanks studying applied mathematics. 
 I also work as a graduate researcher at the Museum of the North Herbarium Laboratory. Currently my research 
-revolves around applying machine learning and computer vision on herbarium sheet samples to develop new species delineation workflows and insights. 
+revolves around applying machine learning and computer vision on herbarium sheet specimen to develop new species delimitation workflows and insights. 
 
 My research interests include numerical analysis, machine learning, and graph theory.
 </font>
