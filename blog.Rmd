@@ -8,10 +8,35 @@ pagetitle: "Stefano Fochesatto"
 
 
 ## Soul Glo Track Highlights
-
 Soul Glo is a radio show that I DJ at the UAF student radio, KSUA 91.5 FM. I mainly play R&B music, from old school mowtown like The Impressions to more contemporary electro-soul like Busty and The Bass. You can hear it live most Tuesday's from 3:30 to 4:30 through the airwaves or online at the station's [homepage](https://www.ksuaradio.com/). 
 
 ---
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+### Soul Glo Track Highlights 5/3/22
+<font size='3'>
+This week had a mix of older and new songs. We started the playlist featuring a few throwback songs, Sade's 'Kiss of Life', Stevie's 'Knocks Me Off My Feet' and New Editions 'Mr.Telephone Man'. All released in different eras from late 70's to early 90's to the early 2000's yet the all seem to fit together with a similar vibe. 
+
+The new tracks that really stood out to me this week are 'My Line' performed by Reuben James featuring Col3trane, Jay Prince, Vula & Soweto Kinch. The track has a new wave spin on the classic 90's new soul sound. The producing and delivery in the verse feels lowkey like something good track you might find on soundcloud, and the horn solo at the end manages to fit well while still delivering dense vocabulary à la Braxton Cook. I also really enjoyed the closing track 'Nayhoo' by Chon featuring Masego & Lophiile. This track was my first foray into neo soul with math rock influences, two genres that surprisingly, fit really well together. 
+</font>
+:::
+::: {.column width="50%"}
+ <iframe src="https://open.spotify.com/embed/playlist/2B4DgbCnjeVKm10CvLzUcN?utm_source=generator" width="90%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media" style="border: 2px solid #4582ec;
+                                                border-radius: 4px; 
+                                                padding: 5px; 
+                                                border-radius: 8px; 
+                                                margin-right: 20px" align="right"></iframe>
+:::
+::::::::::::::
+
+
+---
+
+
+
+
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
