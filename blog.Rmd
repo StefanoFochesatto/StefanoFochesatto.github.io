@@ -12,6 +12,27 @@ Soul Glo is a radio show that I DJ at the UAF student radio, KSUA 91.5 FM. I mai
 
 ---
 
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+ <iframe src="https://open.spotify.com/embed/playlist/7CQJSA0RuuEv2XCcKmVwNg?utm_source=generator" width="90%" height="420" frameborder="0" allowtransparency="true" allow="encrypted-media" style="border: 2px solid #4582ec;
+                                                border-radius: 4px; 
+                                                padding: 5px; 
+                                                border-radius: 8px; 
+                                                margin-right: 20px" align="left"></iframe>
+ 
+:::
+::: {.column width="50%"}
+### Soul Glo Track Highlights 5/10/22
+<font size='3'>
+For the playlist this week I tried to incorporate a loose theme of songs that featured acoustic elements. I think that the tracks that most embody the theme this week are PJ Morton and Alex Isley's acoustic rendition of 'How Deep is Your Love' and Victory's rendition of the Stevie Wonder classic 'Overjoyed'. 
+</font>
+:::
+::::::::::::::
+
+---
+
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
 
