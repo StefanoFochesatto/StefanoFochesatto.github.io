@@ -9,7 +9,7 @@ pagetitle: "Stefano Fochesatto"
 
 ### Contributed
 
-2022 Mathematics of Machine Learning, Fairbanks, AK: [*Decision Tree Learning from Scratch*](https://github.com/StefanoFochesatto/Homework-Spring-2022/blob/main/Mathematics%20of%20Machine%20Learning/DecisionTreePresentation.pdf)
+2022 Mathematics of Machine Learning, Fairbanks, AK: [*Decision Tree Learning from Scratch*](https://bueler.github.io/M692S22/slides/fochesatto-decisiontree.pdf)
 
 [Colab Notebook (code)](https://colab.research.google.com/drive/13DB1YlYSAZs6PdZdt9Zbs7RI9Nk4RKMn?usp=sharing)
 

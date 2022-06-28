@@ -13,7 +13,7 @@
 
 <title>Deep Learning Image Clustering to Aid Species Delimitation Within the Vitis Arizonica Complex</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
@@ -62,6 +62,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
 
@@ -86,6 +87,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -311,7 +315,7 @@ div.tocify {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -370,27 +374,63 @@ div.tocify {
 
 
 
-<h1 class="title toc-ignore">Deep Learning Image Clustering to Aid Species Delimitation Within the Vitis Arizonica Complex</h1>
+<h1 class="title toc-ignore">Deep Learning Image Clustering to Aid
+Species Delimitation Within the Vitis Arizonica Complex</h1>
 
 </div>
 
 
-<p><link rel="stylesheet" href="styles.css" type="text/css"> <link rel="stylesheet" href="academicicons/css/academicons.min.css"/></p>
+<p><link rel="stylesheet" href="styles.css" type="text/css">
+<link rel="stylesheet" href="academicicons/css/academicons.min.css"/></p>
 <div id="section-introduction" class="section level2">
 <h2>Introduction</h2>
-<p>The goal of this research is to use machine learning to capture and quantify the morphological variation inherent in the ~ 370 herbarium specimen images from several herbaria with large Vitis arizonica complex collections (ASU, RSA, and US). Specifically we will be applying a convolutional variational autoencoder to compress these images into a latent space where a further cluster analysis might reveal biological insights that could aid in further species delimitation. Ultimately, these insights could help in an explicit statistical framework for morphological variation, aiding in delineating species by integrating morphological and phylogenetic data.</p>
+<p>The goal of this research is to use machine learning to capture and
+quantify the morphological variation inherent in the ~ 370 herbarium
+specimen images from several herbaria with large Vitis arizonica complex
+collections (ASU, RSA, and US). Specifically we will be applying a
+convolutional variational autoencoder to compress these images into a
+latent space where a further cluster analysis might reveal biological
+insights that could aid in further species delimitation. Ultimately,
+these insights could help in an explicit statistical framework for
+morphological variation, aiding in delineating species by integrating
+morphological and phylogenetic data.</p>
 </div>
-<div id="section-building-the-segmentation-masks" class="section level2">
+<div id="section-building-the-segmentation-masks"
+class="section level2">
 <h2>Building the Segmentation Masks</h2>
-<p>Before we are able to start working on training a model to cluster the images we need to remove any biasing information from the images. This involves creating something called a segmentation mask, which will essentially remove any biasing information involved in capturing the herbarium sheet samples. The way that the mask works is we will create a black and white image, where there is no presence of the plant sample we will color the image black and where there is we will color the image white.</p>
-<p>In terms of biasing information think, camera settings, or any identifying labels. Ideally we want the segmentation mask to still capture all the information that a paleo-botanist would use when delineating species. I’m told that most of the time this information if found almost entirely in the morphology of the leaves.</p>
-<p>We will be using a workflow described in the following <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7328659/">article</a> by Alexander White, Rebecca Dikow, et.al, Their article describes training a neural network to be able to recreate segmentation masks for fern shaped herbarium sheets. To accomplish this tasks they had to develop a workflow for creating several ‘ground truth’ masks. This is the part of their research that we will be taking advantage of. Currently this workflow involves a good amount of editing by hand if in the later stages of our research, we decide that more data is needed we might spend time training a neural network to create these masks for us.</p>
-<p>Mapping out the workflow for building the segmentation masks, consider the following,</p>
+<p>Before we are able to start working on training a model to cluster
+the images we need to remove any biasing information from the images.
+This involves creating something called a segmentation mask, which will
+essentially remove any biasing information involved in capturing the
+herbarium sheet samples. The way that the mask works is we will create a
+black and white image, where there is no presence of the plant sample we
+will color the image black and where there is we will color the image
+white.</p>
+<p>In terms of biasing information think, camera settings, or any
+identifying labels. Ideally we want the segmentation mask to still
+capture all the information that a paleo-botanist would use when
+delineating species. I’m told that most of the time this information if
+found almost entirely in the morphology of the leaves.</p>
+<p>We will be using a workflow described in the following <a
+href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7328659/">article</a>
+by Alexander White, Rebecca Dikow, et.al, Their article describes
+training a neural network to be able to recreate segmentation masks for
+fern shaped herbarium sheets. To accomplish this tasks they had to
+develop a workflow for creating several ‘ground truth’ masks. This is
+the part of their research that we will be taking advantage of.
+Currently this workflow involves a good amount of editing by hand if in
+the later stages of our research, we decide that more data is needed we
+might spend time training a neural network to create these masks for
+us.</p>
+<p>Mapping out the workflow for building the segmentation masks,
+consider the following,</p>
 <p><img src="images/SegmentationWorkflow.png" style="width:100%" align="center"></p>
 </div>
 <div id="section-reformatting-images" class="section level2">
 <h2>Reformatting Images</h2>
-<p>Some of the Herbarium Sheets were received and stored in the .tiff file format. In order to save space and have our data in one file format we will be converting them to .jpg.</p>
+<p>Some of the Herbarium Sheets were received and stored in the .tiff
+file format. In order to save space and have our data in one file format
+we will be converting them to .jpg.</p>
 <pre class="python"><code>import os
 from PIL import Image
 
@@ -417,16 +457,37 @@ for root, dirs, files in os.walk(yourpath, topdown=False):
         except e:
           print(e)</code></pre>
 </div>
-<div id="section-applying-the-initial-segmentation" class="section level2">
+<div id="section-applying-the-initial-segmentation"
+class="section level2">
 <h2>Applying the Initial Segmentation</h2>
-<p>The code for the initial segmentation used in the article by Alexander White, Rebecca Dikow, et al. can be found <a href="https://github.com/sidatasciencelab/fern_segmentation/blob/master/segmentation_code.ipynb">here</a>. This initial code relies on an a python wrapper for OpenCV(Computer Vision) called cv2. The code simply performs Otsu’s biniarization method to create an initial mask.</p>
+<p>The code for the initial segmentation used in the article by
+Alexander White, Rebecca Dikow, et al. can be found <a
+href="https://github.com/sidatasciencelab/fern_segmentation/blob/master/segmentation_code.ipynb">here</a>.
+This initial code relies on an a python wrapper for OpenCV(Computer
+Vision) called cv2. The code simply performs Otsu’s biniarization method
+to create an initial mask.</p>
 <div id="section-otsus-binarization-method" class="section level3">
 <h3>Otsu’s Binarization Method</h3>
-<p>Otsu’s Method finds a threshold for making the mask, which minimized the intra-class variance(variance between the two black and white classes.) Here is an example of how it works. First we take the grayscale image then create a frequency histogram of it’s pixel intensity values(1-255). We scan through this frequency histogram, everything to the left of our scan is put into one class everything to the right of our scan is put into another class. At each iteration we compute a cost function which is a weighted sum of the variances in each class,</p>
-<p><span class="math display">\[\sigma^2_w(t) = w_1(t)\sigma^2_1(t) + w_2(t)\sigma^2_2(t).\]</span> <span class="math display">\[w_1(t) = \sum_{i = 1}^{t - 1}p(i)\]</span> <span class="math display">\[w_2(t) = \sum_{i = t}^{255}p(i)\]</span></p>
-<p>Since there are only two classes, namely black and white we know that the threshold which minimizes intra-class variance, must also maximize inter-class variance. Which is computed with the following,</p>
-<p><span class="math display">\[ \sigma^2_b(t) = w_1(t)w_2(t)\left(\mu_1(t)- \mu_2(t)\right)^2.\]</span></p>
-<p>Here is some python code for computing the Otsu Binarization threshold.</p>
+<p>Otsu’s Method finds a threshold for making the mask, which minimized
+the intra-class variance(variance between the two black and white
+classes.) Here is an example of how it works. First we take the
+grayscale image then create a frequency histogram of it’s pixel
+intensity values(1-255). We scan through this frequency histogram,
+everything to the left of our scan is put into one class everything to
+the right of our scan is put into another class. At each iteration we
+compute a cost function which is a weighted sum of the variances in each
+class,</p>
+<p><span class="math display">\[\sigma^2_w(t) = w_1(t)\sigma^2_1(t) +
+w_2(t)\sigma^2_2(t).\]</span> <span class="math display">\[w_1(t) =
+\sum_{i = 1}^{t - 1}p(i)\]</span> <span class="math display">\[w_2(t) =
+\sum_{i = t}^{255}p(i)\]</span></p>
+<p>Since there are only two classes, namely black and white we know that
+the threshold which minimizes intra-class variance, must also maximize
+inter-class variance. Which is computed with the following,</p>
+<p><span class="math display">\[ \sigma^2_b(t) =
+w_1(t)w_2(t)\left(\mu_1(t)- \mu_2(t)\right)^2.\]</span></p>
+<p>Here is some python code for computing the Otsu Binarization
+threshold.</p>
 <pre class="python"><code>import cv2 #openCV for image processing
 import numpy as np
 

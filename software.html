@@ -13,7 +13,7 @@
 
 <title>Stefano Fochesatto</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
@@ -59,6 +59,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
 
@@ -83,6 +84,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -235,7 +239,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -298,12 +302,24 @@ $(document).ready(function () {
 </div>
 
 
-<p><link rel="stylesheet" href="styles.css" type="text/css"> <link rel="stylesheet" href="academicicons/css/academicons.min.css"/></p>
-<div id="custom-borders-for-geor-package-objects." class="section level3">
+<p><link rel="stylesheet" href="styles.css" type="text/css">
+<link rel="stylesheet" href="academicicons/css/academicons.min.css"/></p>
+<div id="custom-borders-for-geor-package-objects."
+class="section level3">
 <h3>Custom Borders for ‘geoR’ Package Objects.</h3>
-<p>The following <em>get_borders(my.lonlat, concavity_param, frac)</em> function finds the concave hull of your geoR data object, and generates a nice bouding border for your geoR object.</p>
-<p><a href="https://github.com/StefanoFochesatto/Homework-Spring-2022/blob/main/Spatial%20Statistics/get_borders.r"><em>get_borders()</em></a> <em>modified from Dr.Margaret Short’s Code</em></p>
-<p>The function takes three parameters, my.lonlat, concavity_param, and frac. The my.lonlat parameter is simply a 2 column matrix of your lon,lat data. The concavity_param argument is a relative measure of concavity. When set to 1 we get a concave hull, for sufficiently large concavity_param we get the convex hull. The frac argument extends the border in every direction. The function uses the geoR, concaveman, and rgeos packages. The following is an example, and results.</p>
+<p>The following <em>get_borders(my.lonlat, concavity_param, frac)</em>
+function finds the concave hull of your geoR data object, and generates
+a nice bouding border for your geoR object.</p>
+<p><a
+href="https://github.com/StefanoFochesatto/Homework-Spring-2022/blob/main/Spatial%20Statistics/get_borders.r"><em>get_borders()</em></a>
+<em>modified from Dr.Margaret Short’s Code</em></p>
+<p>The function takes three parameters, my.lonlat, concavity_param, and
+frac. The my.lonlat parameter is simply a 2 column matrix of your
+lon,lat data. The concavity_param argument is a relative measure of
+concavity. When set to 1 we get a concave hull, for sufficiently large
+concavity_param we get the convex hull. The frac argument extends the
+border in every direction. The function uses the geoR, concaveman, and
+rgeos packages. The following is an example, and results.</p>
 <pre class="r"><code>install.packages(c(&quot;geoR&quot;, &quot;concaveman&quot;, &quot;rgeos&quot;))
 library(geoR)
 library(concaveman)

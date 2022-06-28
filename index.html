@@ -13,7 +13,7 @@
 
 <title>Stefano Fochesatto</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
@@ -60,6 +60,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
 
@@ -84,6 +85,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -236,7 +240,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -299,7 +303,8 @@ $(document).ready(function () {
 </div>
 
 
-<link rel="stylesheet" href="styles.css" type="text/css"> <link rel="stylesheet" href="academicicons/css/academicons.min.css"/>
+<link rel="stylesheet" href="styles.css" type="text/css">
+<link rel="stylesheet" href="academicicons/css/academicons.min.css"/>
 <meta name="google-site-verification" content="dSx33pirLBBkRYQTzgbCqcyn0MPf0X2aJMikpWvo0Y0" />
 </meta>
 <p><img src="images/profile.jpg" style="width:40%; border: 2px solid #4582ec;
@@ -309,8 +314,14 @@ $(document).ready(function () {
                                                 margin-right: 20px" align="left"></p>
 <div id="about" class="section level2">
 <h2>About</h2>
-<p><font size='4'> I am a graduate student at the University of Alaska Fairbanks studying applied mathematics. I also work as a graduate researcher at the Museum of the North Herbarium Laboratory. Currently my research revolves around applying machine learning and computer vision on herbarium sheet specimen to develop new species delimitation workflows and insights.</p>
-<p>My research interests include numerical analysis, machine learning, and graph theory. </font></p>
+<p><font size='4'> I am a graduate student at the University of Alaska
+Fairbanks studying applied mathematics. I also work as a graduate
+researcher at the Museum of the North Herbarium Laboratory. Currently my
+research revolves around applying machine learning and computer vision
+on herbarium sheet specimen to develop new species delimitation
+workflows and insights.</p>
+<p>My research interests include numerical analysis, machine learning,
+and graph theory. </font></p>
 </div>
 
 
