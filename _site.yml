@@ -26,5 +26,5 @@ navbar:
 output:
   html_document:
     theme: readable
-    css: 'styles.css'
+    css: "styles.css"
 runtime: shiny
