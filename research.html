@@ -393,7 +393,7 @@ latent space where a further cluster analysis might reveal biological
 insights that could aid in further species delimitation. Ultimately,
 these insights could help in an explicit statistical framework for
 morphological variation, aiding in delineating species by integrating
-morphological and phylogenetic data.</p>
+morphological and phylogeny data.</p>
 </div>
 <div id="section-building-the-segmentation-masks"
 class="section level2">
@@ -457,21 +457,20 @@ for root, dirs, files in os.walk(yourpath, topdown=False):
         except e:
           print(e)</code></pre>
 </div>
-<div id="section-applying-the-initial-segmentation"
-class="section level2">
-<h2>Applying the Initial Segmentation</h2>
+<div id="section-pre-processing" class="section level2">
+<h2>Pre Processing</h2>
 <p>The code for the initial segmentation used in the article by
 Alexander White, Rebecca Dikow, et al. can be found <a
 href="https://github.com/sidatasciencelab/fern_segmentation/blob/master/segmentation_code.ipynb">here</a>.
 This initial code relies on an a python wrapper for OpenCV(Computer
-Vision) called cv2. The code simply performs Otsu’s biniarization method
-to create an initial mask.</p>
-<div id="section-otsus-binarization-method" class="section level3">
-<h3>Otsu’s Binarization Method</h3>
-<p>Otsu’s Method finds a threshold for making the mask, which minimized
-the intra-class variance(variance between the two black and white
-classes.) Here is an example of how it works. First we take the
-grayscale image then create a frequency histogram of it’s pixel
+Vision) called cv2. The code simply performs Otsu binarization method to
+create an initial mask.</p>
+<div id="section-otsu-binarization-method" class="section level3">
+<h3>Otsu Binarization Method</h3>
+<p>The ostsu binarization method finds a threshold for making the mask,
+which minimized the intra-class variance(variance between the two black
+and white classes.) Here is an example of how it works. First we take
+the grayscale image then create a frequency histogram of it’s pixel
 intensity values(1-255). We scan through this frequency histogram,
 everything to the left of our scan is put into one class everything to
 the right of our scan is put into another class. At each iteration we
@@ -503,7 +502,7 @@ for i in range(len(orig)):
 total = sum(freq)
 prob = freq/total
 
-## Applying Otsu&#39;s binarization algorithm to find the threshold which maximizes inter-class variance, 
+## Applying Otsu binarization algorithm to find the threshold which maximizes inter-class variance, 
 inter_variance = np.zeros(255)
 for i in range(1,256):
     w_0 = sum(prob[0:i-1]) 
@@ -520,13 +519,15 @@ Otsu_Thresh = np.argmax(inter_variance)
 print(str(&#39;This is the Otsu threshold computed by the novel implemintation: &#39; + str(Otsu_Thresh)))</code></pre>
 </div>
 </div>
-<div id="section-otsus-binarization-demo" class="section level2">
-<h2>Otsu’s Binarization Demo</h2>
+<div id="section-otsu-binarization-demo" class="section level2">
+<h2>Otsu Binarization Demo</h2>
 <iframe src="https://stefanofochesatto.shinyapps.io/otsudemo/?showcase=0" width="100%" height="550px" data-external="1">
 </iframe>
 </div>
-<div id="section-generating-inital-mask-code" class="section level2">
-<h2>Generating Inital Mask (Code)</h2>
+<div id="section-pre-processing-1" class="section level2">
+<h2>Pre Processing</h2>
+<div id="section-generating-inital-mask" class="section level4">
+<h4>Generating Inital Mask</h4>
 <pre class="python"><code>import cv2 #openCV for image processing
 import numpy as np
 
@@ -571,6 +572,89 @@ for i in Imagelist:
     image_back = Image.fromarray((mask_back).astype(np.uint8))
     os.chdir(str(path+&#39;/Background_Masks&#39;))
     image_back.save(str(i),&quot;JPEG&quot;)     </code></pre>
+</div>
+<div id="section-photoshop-batch-processing" class="section level3">
+<h3>Photoshop Batch Processing</h3>
+<p>From here we take the initial mask and use Photoshop to erase the
+color bar, placard and bar code information that is left behind. So the
+workflow so far results in the following segmentation mask.
+<img src="images/PreProcessingWorkflow.png" style="width:100%" align="center"></p>
+</div>
+<div id="section-processing-for-cluster-algorithm"
+class="section level3">
+<h3>Processing for Cluster Algorithm</h3>
+<p>Given the large file size of the post-Photoshop segmentation mask,
+and the fact that they are not instance-segmentation masks it makes more
+sence to try and cluster the images on a leaf segmentation mask level.
+To do so some more preproccessing is required to prepare the images.
+First we resized the large segmentation masks, to about half size. We
+tested several resizing methods and found that Bit exact nearest
+neighbor interpolation was able to best retain information about edge
+morphology, for our dataset.</p>
+<p>A custom script was written iterate through the resized segmentation
+mask images and crop out instances of high quality leafs to be used for
+the image clustering (Code to this script will be added to the
+programming tab). Finally the leaf instance segmentation were padded to
+retain information about relative size, while normalizing and squaring
+up the images for the clustering algorithm.</p>
+<p>Here is some example code for resizing the large herbarium specimen,
+and adding the padding to square up the leaf instance segmentation
+masks.</p>
+<div id="section-resizing-code" class="section level4">
+<h4>Resizing Code:</h4>
+<pre class="python"><code>path = r&#39;ADDPATH TO YOUR FULL SIZED SEGMENTATION MASKS&#39;
+os.chdir(path) #Change the working directory to the Segmentation Mask directory
+SegmentationMaskList = [] #Pull the current list of files in Segmentation Mask directory
+for file in os.listdir(path):
+    if file.endswith(&quot;.jpg&quot;) and not file.startswith(&#39;.&#39;): 
+        SegmentationMaskList.append(file)
+
+SavePath = os.path.join(path, &#39;ResizedInterNearExact&#39;)
+os.mkdir(SavePath)
+for i in SegmentationMaskList:
+        os.chdir(path) 
+        # Read in image with segmentation mask
+        img = cv2.imread(i, cv2.IMREAD_GRAYSCALE)
+        # Resizing
+        scaleFactor = 2000/img.shape[0]
+        dim = (int(img.shape[1]*scaleFactor),int(img.shape[0]*scaleFactor))
+        resized = cv2.resize(img, dim, interpolation = cv2.INTER_NEAREST_EXACT)
+        # Saving
+        os.chdir(SavePath) 
+        Rename = i[:-4] + &#39;_resized.jpg&#39;
+        cv2.imwrite(Rename, resized)</code></pre>
+</div>
+<div id="section-padding-code" class="section level4">
+<h4>Padding Code:</h4>
+<pre class="python"><code>path = r&#39;ADDPATH TO YOUR RESIZED SEGMENTATION MASKS&#39;
+os.chdir(path) #Change the working directory to the Resized Segmentation Masks Directory
+SavePath = os.path.join(path, &#39;PaddedSquare&#39;)
+os.mkdir(SavePath)
+for i in SegmentationMaskList:
+       os.chdir(path) 
+       img = cv2.imread(i, cv2.IMREAD_GRAYSCALE)
+       old_image_height, old_image_width = img.shape
+
+       result = np.full((896,896), 0, dtype=np.uint8)
+
+       # compute center offset
+       x_center = (896 - old_image_width) // 2
+       y_center = (896 - old_image_height) // 2
+
+       # copy img image into center of result image
+       result[y_center:y_center+old_image_height, 
+       x_center:x_center+old_image_width] = img
+       os.chdir(SavePath) # We have to set the path every time since cv2 can&#39;t handle relative paths without it.
+       Rename = i[:-4] + &#39;_Padded.jpg&#39;
+       cv2.imwrite(Rename, result)</code></pre>
+<p>Finally our pre processing pipeline should look like this.
+<img src="images/PreProcessingPipeline.png" style="width:100%" align="center"></p>
+</div>
+</div>
+</div>
+<div id="section-deep-embedded-clustering-algorithm"
+class="section level2">
+<h2>Deep Embedded Clustering Algorithm</h2>
 </div>
 
 

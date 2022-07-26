@@ -11,7 +11,7 @@ library(shiny)
 library(imager)
 library(bslib)
 
-img <- grayscale(load.image('example.jpg'))
+img <- grayscale(load.image('herbimg.jpg'))
 # Define UI for application that draws a histogram
 ui <- fluidPage(
   theme = bs_theme(version = 3, bootswatch = "readable", base_font = font_google('Roboto')),

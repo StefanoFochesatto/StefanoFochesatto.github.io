@@ -15,7 +15,7 @@ description: "Using deep learning image clustering to aid species delimitation w
 
 
 ## Introduction
- The goal of this research is to use machine learning to capture and quantify the morphological variation inherent in the ~ 370 herbarium specimen images from several herbaria with large Vitis arizonica complex collections (ASU, RSA, and US). Specifically we will be applying a convolutional variational autoencoder to compress these images into a latent space where a further cluster analysis might reveal biological insights that could aid in further species delimitation. Ultimately, these insights could help in an explicit statistical framework for morphological variation, aiding in delineating species by integrating morphological and phylogenetic data. 
+ The goal of this research is to use machine learning to capture and quantify the morphological variation inherent in the ~ 370 herbarium specimen images from several herbaria with large Vitis arizonica complex collections (ASU, RSA, and US). Specifically we will be applying a convolutional variational autoencoder to compress these images into a latent space where a further cluster analysis might reveal biological insights that could aid in further species delimitation. Ultimately, these insights could help in an explicit statistical framework for morphological variation, aiding in delineating species by integrating morphological and phylogeny data. 
 
 
 
@@ -62,15 +62,15 @@ for root, dirs, files in os.walk(yourpath, topdown=False):
         except e:
           print(e)
 ```
-## Applying the Initial Segmentation
+## Pre Processing
 
-The code for the initial segmentation used in the article by Alexander White, Rebecca Dikow, et al. can be found [here](https://github.com/sidatasciencelab/fern_segmentation/blob/master/segmentation_code.ipynb). This initial code relies on an a python wrapper for OpenCV(Computer Vision) called cv2. The code simply performs Otsu's biniarization method to create an initial mask. 
+The code for the initial segmentation used in the article by Alexander White, Rebecca Dikow, et al. can be found [here](https://github.com/sidatasciencelab/fern_segmentation/blob/master/segmentation_code.ipynb). This initial code relies on an a python wrapper for OpenCV(Computer Vision) called cv2. The code simply performs Otsu binarization method to create an initial mask. 
 
 
 
-### Otsu's Binarization Method
+### Otsu Binarization Method
 
-Otsu's Method finds a threshold for making the mask, which minimized the intra-class variance(variance between the two black and white classes.) Here is an example of how it works. First we take the grayscale image then create a frequency histogram of it's pixel intensity values(1-255). We scan through this frequency histogram, everything to the left of our scan is put into one class everything to the right of our scan is put into another class. At each iteration we compute a cost function which is a weighted sum of the variances in each class, 
+The ostsu binarization method finds a threshold for making the mask, which minimized the intra-class variance(variance between the two black and white classes.) Here is an example of how it works. First we take the grayscale image then create a frequency histogram of it's pixel intensity values(1-255). We scan through this frequency histogram, everything to the left of our scan is put into one class everything to the right of our scan is put into another class. At each iteration we compute a cost function which is a weighted sum of the variances in each class, 
 
 $$\sigma^2_w(t) = w_1(t)\sigma^2_1(t) + w_2(t)\sigma^2_2(t).$$
 $$w_1(t) = \sum_{i = 1}^{t - 1}p(i)$$
@@ -97,7 +97,7 @@ for i in range(len(orig)):
 total = sum(freq)
 prob = freq/total
 
-## Applying Otsu's binarization algorithm to find the threshold which maximizes inter-class variance, 
+## Applying Otsu binarization algorithm to find the threshold which maximizes inter-class variance, 
 inter_variance = np.zeros(255)
 for i in range(1,256):
     w_0 = sum(prob[0:i-1]) 
@@ -116,7 +116,7 @@ print(str('This is the Otsu threshold computed by the novel implemintation: ' + 
 
 
 
-## Otsu's Binarization Demo
+## Otsu Binarization Demo
 
 ```{r, echo = FALSE, out.width='100%'}
 library(shiny)
@@ -124,8 +124,8 @@ knitr::include_app("https://stefanofochesatto.shinyapps.io/otsudemo/", height = 
 ```
 
 
-## Generating Inital Mask (Code)
-
+## Pre Processing 
+#### Generating Inital Mask
 ```{python eval = FALSE}
 import cv2 #openCV for image processing
 import numpy as np
@@ -173,10 +173,71 @@ for i in Imagelist:
     image_back.save(str(i),"JPEG")     
 ```
 
+### Photoshop Batch Processing
+From here we take the initial mask and use Photoshop to erase the color bar, placard and bar code information that is left behind. So the workflow so far results in the following segmentation mask. 
+<img src="images/PreProcessingWorkflow.png" style="width:100%" align="center">
 
+### Processing for Cluster Algorithm
+Given the large file size of the post-Photoshop segmentation mask, and the fact that they are not instance-segmentation masks it makes more sence to try and cluster the images on a leaf segmentation mask level. To do so some more preproccessing is required to prepare the images. First we resized the large segmentation masks, to about half size. We tested several resizing methods and found that Bit exact nearest neighbor interpolation was able to best retain information about edge morphology, for our dataset. 
 
+A custom script was written iterate through the resized segmentation mask images and crop out instances of high quality leafs to be used for the image clustering (Code to this script will be added to the programming tab). Finally the leaf instance segmentation were padded to retain information about relative size, while normalizing and squaring up the images for the clustering algorithm. 
 
+Here is some example code for resizing the large herbarium specimen, and adding the padding to square up the leaf instance segmentation masks. 
 
+#### Resizing Code:
+```{python eval = FALSE}
+path = r'ADDPATH TO YOUR FULL SIZED SEGMENTATION MASKS'
+os.chdir(path) #Change the working directory to the Segmentation Mask directory
+SegmentationMaskList = [] #Pull the current list of files in Segmentation Mask directory
+for file in os.listdir(path):
+    if file.endswith(".jpg") and not file.startswith('.'): 
+        SegmentationMaskList.append(file)
+
+SavePath = os.path.join(path, 'ResizedInterNearExact')
+os.mkdir(SavePath)
+for i in SegmentationMaskList:
+        os.chdir(path) 
+        # Read in image with segmentation mask
+        img = cv2.imread(i, cv2.IMREAD_GRAYSCALE)
+        # Resizing
+        scaleFactor = 2000/img.shape[0]
+        dim = (int(img.shape[1]*scaleFactor),int(img.shape[0]*scaleFactor))
+        resized = cv2.resize(img, dim, interpolation = cv2.INTER_NEAREST_EXACT)
+        # Saving
+        os.chdir(SavePath) 
+        Rename = i[:-4] + '_resized.jpg'
+        cv2.imwrite(Rename, resized)
+
+```
+#### Padding Code:
+```{python eval = FALSE}
+path = r'ADDPATH TO YOUR RESIZED SEGMENTATION MASKS'
+os.chdir(path) #Change the working directory to the Resized Segmentation Masks Directory
+SavePath = os.path.join(path, 'PaddedSquare')
+os.mkdir(SavePath)
+for i in SegmentationMaskList:
+       os.chdir(path) 
+       img = cv2.imread(i, cv2.IMREAD_GRAYSCALE)
+       old_image_height, old_image_width = img.shape
+
+       result = np.full((896,896), 0, dtype=np.uint8)
+
+       # compute center offset
+       x_center = (896 - old_image_width) // 2
+       y_center = (896 - old_image_height) // 2
+
+       # copy img image into center of result image
+       result[y_center:y_center+old_image_height, 
+       x_center:x_center+old_image_width] = img
+       os.chdir(SavePath) # We have to set the path every time since cv2 can't handle relative paths without it.
+       Rename = i[:-4] + '_Padded.jpg'
+       cv2.imwrite(Rename, result)
+
+```
+Finally our pre processing pipeline should look like this.
+<img src="images/PreProcessingPipeline.png" style="width:100%" align="center">
+
+## Deep Embedded Clustering Algorithm
 
 
 
