@@ -1,0 +1,16 @@
+---
+title: " "
+pagetitle: "Current Research Notes"
+description: "Excalidraw Iframe with Research Notes"
+output: html_document
+---
+
+<link rel="stylesheet" href="styles.css" type="text/css">
+<link rel="stylesheet" href="academicicons/css/academicons.min.css"/>
+
+## Research Notes
+
+ <iframe src="https://excalidraw.com/#json=U89kgi4yPo9feCkPb0n3W,KxisoCTTGvI1h5fGnJP5Ig" width="95%" height="600" frameborder="0" allowtransparency="true" allow="encrypted-media" style="border: 2px solid #4582ec;
+                                                border-radius: 4px; 
+                                                padding: 5px; 
+                                                border-radius: 8px" align="left"></iframe>

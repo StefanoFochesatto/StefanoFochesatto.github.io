@@ -11,9 +11,6 @@ description: "Using deep learning image clustering to aid species delimitation w
 <link rel="stylesheet" href="styles.css" type="text/css">
 <link rel="stylesheet" href="academicicons/css/academicons.min.css"/>
 
-
-
-
 ## Introduction
  The goal of this research is to use machine learning to capture and quantify the morphological variation inherent in the ~ 370 herbarium specimen images from several herbaria with large Vitis arizonica complex collections (ASU, RSA, and US). Specifically we will be applying a convolutional variational autoencoder to compress these images into a latent space where a further cluster analysis might reveal biological insights that could aid in further species delimitation. Ultimately, these insights could help in an explicit statistical framework for morphological variation, aiding in delineating species by integrating morphological and phylogeny data. 
 

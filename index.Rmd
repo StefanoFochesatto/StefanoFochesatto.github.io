@@ -30,6 +30,10 @@ I also work as a graduate researcher at the Museum of the North Herbarium Labora
 revolves around applying machine learning and computer vision on herbarium sheet specimen to develop new species delimitation workflows and insights. 
 
 My research interests include numerical analysis, machine learning, and graph theory.
+
+
+<a href="ResearchNotes.html">Research Notes</a>
+
 </font>
 
 
