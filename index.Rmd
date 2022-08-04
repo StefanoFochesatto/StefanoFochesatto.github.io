@@ -19,8 +19,12 @@ meta() %>%
                                                 padding: 5px; 
                                                 border-radius: 8px; 
                                                 margin-right: 20px" align="left">
+<script data-goatcounter="https://stefanofochesatto.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+        
                                                 
                                       
+                              
 ## About
 
 
