@@ -12,6 +12,27 @@ Soul Glo is a radio show that I DJ at the UAF student radio, KSUA 91.5 FM. I mai
 
 ---
 
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+
+### Soul Glo Track Highlights 5/17/22
+<font size='3'>
+This week we featured a whole load of female artists. We've heard Yebba before on PJ Morton's version of How Deep is Your Love, but this time we get her solo work. In all aspects from songwriting to vocal technicality Yebba's work on this playlist is a masterclass. Yebba's Evergreen manages to blend aspects of pop form, R&B bass lines and backing and gospel organ in an incredibly refreshing way. Jorja Smith's Beautiful Little Fools
+provides an incredibly moving commentary about the way women are portrayed and put on display in media, with quite possibly the smoothest R&B backing I've ever experienced. Both Smith's Lost & Found and Lianne La Havas' Bittersweet discuss the many forms in which relationships end. Lost & Found paints the picture of a longing lover, reflecting and ultimately realizing they were more in love with an idea of being in a relationship rather than the person. Bittersweet interestingly feels like it takes the opposite approach describing a person who's ready to move on. In general this playlist features intricate and relatable storytelling about the struggles in love, life and identity that are unique to women and no artists embodies this statement more than Arlo Parks. 
+</font>
+:::
+::: {.column width="50%"}
+ <iframe src="https://open.spotify.com/embed/playlist/6hV5iEOVMznziqt2JGRpcI?utm_source=generator" width="90%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media" style="border: 2px solid #4582ec;
+                                                border-radius: 4px; 
+                                                padding: 5px; 
+                                                border-radius: 8px; 
+                                                margin-right: 20px" align="right"></iframe>
+:::
+::::::::::::::
+
+
+---
+
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
