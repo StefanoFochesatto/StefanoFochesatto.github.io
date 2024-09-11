@@ -9,7 +9,7 @@ pagetitle: "Stefano Fochesatto"
 
 # Welcome to my Course Work REPO
 
-This repository is dedicated to presenting my techincal course work as a mathematics student at UAF.
+This repository is dedicated to presenting my technical course work as a mathematics student at UAF.
 *Note: Many courses did not require latex or any sort of programming so they will not be represented *
 
  
@@ -22,7 +22,7 @@ Topics include a variety of regression techniques, Type I and Type II sums of sq
 
 [STAT 402 Scientific Sampling](https://github.com/StefanoFochesatto/STAT-402)
 
-Topics include sampling methods, including simple random, stratified and systematic; estimation procedures, including ratio and regression methods; special area and point sampling procedures; optimum allocation. The course included three group projects centered around estimating a paramater. My favorite project was the third [sampling project](https://github.com/StefanoFochesatto/STAT-402/blob/main/Coursework/Sampling%20Project%20%233/Project3Final.pdf), where we had to estimate the total number of pages in the QZ section of the Rasmussen Library. Although the stratified, systematic estimator we used was far from exotic the project was a fun hands on application of what we learned throughout the course. 
+Topics include sampling methods, including simple random, stratified and systematic; estimation procedures, including ratio and regression methods; special area and point sampling procedures; optimum allocation. The course included three group projects centered around estimating a parameter. My favorite project was the third [sampling project](https://github.com/StefanoFochesatto/STAT-402/blob/main/Coursework/Sampling%20Project%20%233/Project3Final.pdf), where we had to estimate the total number of pages in the QZ section of the Rasmussen Library. Although the stratified, systematic estimator we used was far from exotic the project was a fun hands on application of what we learned throughout the course. 
  
  [MATH 614 Numerical Linear Algebra](https://github.com/StefanoFochesatto/MATH-614)
  
@@ -38,7 +38,7 @@ database applications using ‘cloud-based’ methods. The course came about as 
  
  [MATH 316 History and Philosophy of Mathematics](https://github.com/StefanoFochesatto/MATH-316)
  
-This course provided an introduction to several important periods in the history of mathematics, including mathematics of Ancient Babylon, Mesopotamia, Greece, China and India, medieval Europe, the Middle East and the Renaissance; the development of geometry, algebra and calculus. The course demanded several presentations throughout the semester, my two favorate were on the topic of [Florence Nightingale diagrams](https://github.com/StefanoFochesatto/MATH-316/blob/main/Florence%20Nightingale%20Presentation.pdf), and the [history of approximating methods for pi](https://github.com/StefanoFochesatto/MATH-316/blob/main/Approximation%20Pi%20Presentation.pdf). My Florence Nightingale presentation culminated in a [simple dashboard demo](https://github.com/StefanoFochesatto/MATH-316/blob/main/Data%20Dashboard%20Demo.ipynb) built using plotly express and dash. My final presentation on the approximation of pi incorported a [convergence analysis of several 17th century methods using matlab](https://github.com/StefanoFochesatto/MATH-316/tree/main/Final%20Presentation%20Convergence%20Analysis), as well as the classic [Monte Carlo method for approximating pi.](https://github.com/StefanoFochesatto/MATH-316/tree/main/Final%20Presentation%20Monte%20Carlo%20Demo)  
+This course provided an introduction to several important periods in the history of mathematics, including mathematics of Ancient Babylon, Mesopotamia, Greece, China and India, medieval Europe, the Middle East and the Renaissance; the development of geometry, algebra and calculus. The course demanded several presentations throughout the semester, my two favorate were on the topic of [Florence Nightingale diagrams](https://github.com/StefanoFochesatto/MATH-316/blob/main/Florence%20Nightingale%20Presentation.pdf), and the [history of approximating methods for pi](https://github.com/StefanoFochesatto/MATH-316/blob/main/Approximation%20Pi%20Presentation.pdf). My Florence Nightingale presentation culminated in a [simple dashboard demo](https://github.com/StefanoFochesatto/MATH-316/blob/main/Data%20Dashboard%20Demo.ipynb) built using plotly express and dash. My final presentation on the approximation of pi incorporated a [convergence analysis of several 17th century methods using matlab](https://github.com/StefanoFochesatto/MATH-316/tree/main/Final%20Presentation%20Convergence%20Analysis), as well as the classic [Monte Carlo method for approximating pi.](https://github.com/StefanoFochesatto/MATH-316/tree/main/Final%20Presentation%20Monte%20Carlo%20Demo)  
  
  [MATH 401 Real Analysis](https://github.com/StefanoFochesatto/MATH-401)
  
@@ -95,8 +95,8 @@ directed graphs, matchings, Hamiltonian and Eulerian graphs, and Ramsey Theory.
  
  [CS 201 Computer Science I](https://github.com/StefanoFochesatto/CS-201)
  
-This course provided a broad overview of basic programing structures and best practices. Topics included 
+This course provided a broad overview of basic programming structures and best practices. Topics included 
 algorithm development, structured programming, top-down design, good programming style, object-oriented programming and elementary data structures.
 The course concluded in a group project where we constructed a terminal based calculator with various features such as, a token based interpreter, elementary root 
-finding methods, and various combinatorial functions(Bell, Stirling, Combination, Permutation, K-list) with support for variable presicion arithmetic through the [GMP library](https://gmplib.org/).
+finding methods, and various combinatorial functions(Bell, Stirling, Combination, Permutation, K-list) with support for variable precision arithmetic through the [GMP library](https://gmplib.org/).
 

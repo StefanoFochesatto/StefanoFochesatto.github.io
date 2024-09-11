@@ -29,11 +29,11 @@ meta() %>%
 
 
 <font size='4'>
-I am a graduate student at the University of Alaska Fairbanks studying applied mathematics. 
-I also work as a graduate researcher at the Museum of the North Herbarium Laboratory. Currently my research 
-revolves around applying machine learning and computer vision on herbarium sheet specimen to develop new species delimitation workflows and insights. 
+I’m a recent graduate student from mathematics at the University of Alaska Fairbanks. My mathematical
+interests lie in Graph Theory, Optimization, and Numerical Analysis. Most recently I’ve been researching
+methods for adaptive mesh refinement for free boundary problems. I have a working background in
+statistic, computer vision, and machine learning.
 
-My research interests include numerical analysis, machine learning, and graph theory.
 
 
 <a href="ResearchNotes.html">Research Notes</a>

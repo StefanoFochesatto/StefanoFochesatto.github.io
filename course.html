@@ -13,7 +13,7 @@
 
 <title>Stefano Fochesatto</title>
 
-<script src="site_libs/header-attrs-2.14/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
@@ -32,8 +32,8 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
-<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -144,11 +144,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -177,8 +181,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -186,16 +190,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -306,7 +303,7 @@ $(document).ready(function () {
 <link rel="stylesheet" href="academicicons/css/academicons.min.css"/></p>
 <div id="welcome-to-my-course-work-repo" class="section level1">
 <h1>Welcome to my Course Work REPO</h1>
-<p>This repository is dedicated to presenting my techincal course work
+<p>This repository is dedicated to presenting my technical course work
 as a mathematics student at UAF. <em>Note: Many courses did not require
 latex or any sort of programming so they will not be represented
 </em></p>
@@ -325,7 +322,7 @@ Scientific Sampling</a></p>
 and systematic; estimation procedures, including ratio and regression
 methods; special area and point sampling procedures; optimum allocation.
 The course included three group projects centered around estimating a
-paramater. My favorite project was the third <a
+parameter. My favorite project was the third <a
 href="https://github.com/StefanoFochesatto/STAT-402/blob/main/Coursework/Sampling%20Project%20%233/Project3Final.pdf">sampling
 project</a>, where we had to estimate the total number of pages in the
 QZ section of the Rasmussen Library. Although the stratified, systematic
@@ -372,7 +369,7 @@ of approximating methods for pi</a>. My Florence Nightingale
 presentation culminated in a <a
 href="https://github.com/StefanoFochesatto/MATH-316/blob/main/Data%20Dashboard%20Demo.ipynb">simple
 dashboard demo</a> built using plotly express and dash. My final
-presentation on the approximation of pi incorported a <a
+presentation on the approximation of pi incorporated a <a
 href="https://github.com/StefanoFochesatto/MATH-316/tree/main/Final%20Presentation%20Convergence%20Analysis">convergence
 analysis of several 17th century methods using matlab</a>, as well as
 the classic <a
@@ -445,14 +442,14 @@ set systems, recurrence relations, directed graphs, matchings,
 Hamiltonian and Eulerian graphs, and Ramsey Theory.</p>
 <p><a href="https://github.com/StefanoFochesatto/CS-201">CS 201 Computer
 Science I</a></p>
-<p>This course provided a broad overview of basic programing structures
+<p>This course provided a broad overview of basic programming structures
 and best practices. Topics included algorithm development, structured
 programming, top-down design, good programming style, object-oriented
 programming and elementary data structures. The course concluded in a
 group project where we constructed a terminal based calculator with
 various features such as, a token based interpreter, elementary root
 finding methods, and various combinatorial functions(Bell, Stirling,
-Combination, Permutation, K-list) with support for variable presicion
+Combination, Permutation, K-list) with support for variable precision
 arithmetic through the <a href="https://gmplib.org/">GMP
 library</a>.</p>
 </div>
