@@ -302,10 +302,66 @@ $(document).ready(function () {
 
 <p><link rel="stylesheet" href="styles.css" type="text/css">
 <link rel="stylesheet" href="academicicons/css/academicons.min.css"/></p>
-<p><a href="PlantResearch.html">Deep Learning Image Clustering to Aid
-Species Delimitation Within the Vitis Arizonica Complex</a></p>
-<p><a href="SolarResearch.html">Cold Regions Research and Engineering
-Lab Solar Panel Imaging Project</a></p>
+<style>
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.card {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 45%;
+    box-sizing: border-box;
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card img {
+    width: 90%;
+    border: 2px solid #4582ec;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.card a {
+    text-decoration: none;
+    color: #4582ec;
+    font-weight: bold;
+    font-size: 18px;
+    display: block;
+    margin-top: 10px;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+</style>
+<hr />
+<div class="card-container">
+<div class="card">
+<p><img src="images/PreProcessingPipeline.png" style="width:90%; border: 2px solid #4582ec; border-radius: 8px; padding: 5px; margin: 0 auto 15px; display: block;"></p>
+<a href="PlantResearch.html">Deep Learning Image Clustering to Aid
+Species Delimitation Within the Vitis Arizonica Complex</a>
+</div>
+<div class="card">
+<img src="CRRELReportImages/OurModel.jpg" 
+             style="width:90%; border: 2px solid #4582ec; border-radius: 8px; padding: 5px; margin: 0 auto 15px; display: block;">
+<a href="SolarResearch.html">Cold Regions Research and Engineering Lab
+Solar Panel Imaging Project</a>
+</div>
+</div>
 
 
 
