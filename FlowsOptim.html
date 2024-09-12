@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Flows From an Optimization Perspective</title>
+
+<script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/readable.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/jqueryui-1.13.2/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+<style type="text/css">
+
+#section-TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#section-TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+@media print {
+.toc-content {
+  /* see https://github.com/w3c/csswg-drafts/issues/4434 */
+  float: right;
+}
+}
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="section-TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Stefano Fochesatto</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="course.html">Course Work</a>
+</li>
+<li>
+  <a href="research.html">Research</a>
+</li>
+<li>
+  <a href="talks.html">Speaking</a>
+</li>
+<li>
+  <a href="software.html">Programming</a>
+</li>
+<li>
+  <a href="blog.html">Blog</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="contact.html">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="./files/Stefano_Resume.pdf">
+    <span class="ai ai-cv ai-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/StefanoFochesatto">
+    <span class="fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://www.linkedin.com/in/stefano-fochesatto-076447213/">
+    <span class="fab fa-linkedin fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="section-header">
+
+
+
+<h1 class="title toc-ignore">Flows From an Optimization Perspective</h1>
+
+</div>
+
+
+<style>
+.theorem {
+  display: block;
+  font-style: italic;
+  font-size: 20px;
+  font-family: "Times New Roman";
+  color: black;
+}
+.theorem::before {
+  content: "Theorem. ";
+  font-weight: bold;
+  font-style: normal;
+}
+.theorem[text]::before {
+  content: "" attr(text) "";
+}
+.theorem p {
+  display: inline;
+}
+</style>
+<div id="section-introduction" class="section level1">
+<h1>Introduction</h1>
+<p>Network problems most naturally arise in the study of optimization
+and operations research. A typical graph theory student will have seen
+that finding the maximum flow though a network tells us where our
+network has a bottleneck in capacity and such a problem naturally arises
+in applications such as the design of physical networks for road systems
+and other utilities. Now clearly this single problem does not tell the
+whole story. For example say you actually have specific amount of total
+flow which is obviously less than or equal to the maximum, and that you
+would like to distribute from source to sink in some optimal way. To
+discuss such problems it is perhaps more intuitive to consider an
+optimization (specifically linear programming) based approach, rather
+than a graph theoretic approach.</p>
+</div>
+<div id="section-graph-theory-terminology" class="section level1">
+<h1>Graph Theory Terminology</h1>
+<p>A <em>graph</em> is defined by a set of vertices and a set of edges,
+i.e., we define a graph <span class="math inline">\(G\)</span> like so
+<span class="math inline">\(G = (V, E)\)</span>, where <span
+class="math inline">\(V\)</span> is a set of vertices, and <span
+class="math inline">\(E\)</span> is a set of edges. <em>Vertices</em>
+(also called nodes or points) are simply mathematical abstractions of
+the objects in our problems. In the context of road systems, a vertex
+could represent an intersection or a general location. An <em>edge</em>
+(also called link or line) is simply an ordered pair of vertices, meant
+to describe the relationship between vertices. Again, in the context of
+road systems, an edge might represent the street connecting two
+locations or intersections. An <em>arc</em> (or directed edge) defines a
+relation between two vertices that is not symmetric, meaning if vertex
+<span class="math inline">\(a\)</span> is related to vertex <span
+class="math inline">\(b\)</span>, it is not guaranteed that vertex <span
+class="math inline">\(b\)</span> is related to vertex <span
+class="math inline">\(a\)</span>. In the context of road systems, one
+could think of arcs as one-way streets. A <em>path</em> is a sequence of
+distinct arcs connecting two vertices with no repeated vertices. We say
+that a graph is <em>connected</em> if, for every pair of vertices, there
+exists a path connecting them. A <em>cycle</em> is a path that begins
+and ends at the same vertex. A <em>tree</em> is a graph with no cycles.
+A <em>subgraph</em> is a graph whose vertex and edge set is a subset of
+a larger graph, i.e., let <span class="math inline">\(G = (V,
+E)\)</span> and <span class="math inline">\(A = (V&#39;,
+E&#39;)\)</span> is a subgraph if <span class="math inline">\(V&#39;
+\subseteq V\)</span> and <span class="math inline">\(E&#39; \subseteq
+E\)</span>. A <em>spanning tree</em> is a subgraph that contains every
+vertex and is also a tree.</p>
+</div>
+<div id="section-a-primer-in-linear-optimization"
+class="section level1">
+<h1>A Primer in Linear Optimization</h1>
+<p>A <em>Linear Programming (LP) Problem</em> is simply an optimization
+problem where the objective function and constraints are linear. Here is
+a quick example. Note that it has both equality and inequality
+constraints,</p>
+<p><span class="math display">\[
+\begin{align*}
+\mathop{\text{minimize: }}_{x} z = -x_1 - &amp;2x_2\\
+\text{subject to: } -2x_1 + x_2 &amp;= 2\\
+-x_1 + x_2 &amp;\leq 3\\
+x_1, x_2 &amp;\geq 0
+\end{align*}
+\]</span></p>
+<p>We call the <em>Feasible Set</em>, usually denoted by <span
+class="math inline">\(S\)</span>, the set of all points for which the
+constraints are satisfied. Note that for LP problems, this set <span
+class="math inline">\(S\)</span> is always convex. Now, as an aside, the
+term “convex” is overloaded in optimization, and it’s used to describe
+both a property of the feasible set, where any segment between a pair of
+points is contained in the set, and the objective function, where for
+any given point, the function is above its tangent plane. Rest assured
+for LP problems, our functions and feasible sets are convex, leading to
+a fundamental result which will be discussed later.</p>
+<p>Now we say an LP problem is in <em>standard form</em> if it has only
+nonnegative inequality constraints, with <span class="math inline">\(b
+\geq 0\)</span>,</p>
+<p><span class="math display">\[
+\begin{align*}
+\mathop{\text{minimize: }}_{x} z &amp;= c^Tx\\
+\text{subject to: }Ax &amp;= b\\
+x &amp;\geq 0
+\end{align*}
+\]</span></p>
+<p>Take note that in this formulation, <span class="math inline">\(x, c
+\in \mathbb{R}^n\)</span> and <span class="math inline">\(b \in
+\mathbb{R}^m\)</span>, where <span
+class="math inline">\(\mathbb{R}^n\)</span> is the solution space, <span
+class="math inline">\(m\)</span> is the number of equality constraints,
+and we have specifically chosen to minimize the objective function. We
+will often refer to <span class="math inline">\(A \in \mathbb{R}^{m
+\times n}\)</span> as the <em>constraint matrix</em>. It is important to
+note that <em>all</em> LP problems can be converted into standard form,
+often at the expense of increasing the dimension of the solution space,
+but we will suppress the details for now as it is not particularly
+relevant to our discussion of flow problems.</p>
+<p>We say a solution <span class="math inline">\(x\)</span> is a
+<em>basic feasible solution</em> if the columns of the constraint matrix
+corresponding to the non-zero components of <span
+class="math inline">\(x\)</span> are linearly independent (form a basis,
+hence ‘basic’), and <span class="math inline">\(x\)</span> satisfies all
+equality and nonnegativity constraints (hence ‘feasible’).</p>
+<p>Finally, we reach the most important result to remember with the
+<em>Fundamental Theorem of Linear Programming</em>, which states that
+for an LP problem in standard form, <span
+class="math inline">\(x\)</span> is an extreme point of <span
+class="math inline">\(S\)</span> if and only if <span
+class="math inline">\(x\)</span> is a basic feasible solution.
+Furthermore, if an LP problem has a finite optimal solution (which would
+be guaranteed by convexity if <span class="math inline">\(S\)</span> is
+bounded), then the optimal solution is a basic feasible solution.</p>
+<p>Now onto duality! For an LP problem in standard form, which we will
+refer to as the primal problem, we define its <em>dual</em> LP problem
+as,</p>
+<p><span class="math display">\[
+\begin{align*}
+\mathop{\text{maximize: }}_{y} w &amp;= b^Ty\\
+\text{subject to: }A^Ty &amp;= c\\
+y &amp;\geq 0
+\end{align*}
+\]</span></p>
+<p>Note that in this problem <span class="math inline">\(b\)</span> and
+<span class="math inline">\(c\)</span> have been swapped between the
+constraint equation and the objective function, <span
+class="math inline">\(A\)</span> has been transposed, and we are now
+maximizing the objective function. There are many ideas to glean from
+the topic of Duality Theory. For brevity, we will only discuss
+<em>Strong Duality</em>, which states that for a pair of primal and dual
+LP problems, if one has an optimal solution, then so does the other, and
+the optimal objective values are equal. [Hint: This should remind you of
+max flow = min cut].</p>
+<p>All this leads to the main idea of the <em>simplex algorithm</em>,
+the main workhorse for solving LP problems, which is to find the optimal
+solution by simply traversing the extreme points of <span
+class="math inline">\(S\)</span> and certify that our solution is
+optimal with the dual. Now, I’ve suppressed many of the details, but
+hopefully, this is enough to get through our discussion surrounding the
+different variations of flow problems. Extra discussion of the
+<em>network simplex algorithm</em> is in the appendix of the paper.</p>
+</div>
+<div id="section-types-of-network-problems" class="section level1">
+<h1>Types of Network Problems</h1>
+<p>As we will see, there are several different flavors of network
+problems. A typical graph theory student would be familiar with the
+<em>maximum-flow problem</em> and its dual, the <em>minimum-cut
+problem</em>. But we can also formulate the <em>shortest-path
+problem</em> and the <em>assignment (matching) problem</em> as network
+problems. To see this, we will be formulating these problems as special
+forms of the more generalized <em>Minimum Cost Network Flow
+Problem</em>.</p>
+</div>
+<div id="section-minimum-cost-network-flow-problem"
+class="section level1">
+<h1>Minimum Cost Network Flow Problem</h1>
+<p>Suppose you have a directed graph (or network) where each vertex is
+assigned a value of flow, and the weights assigned to the edges
+represent the cost of moving one unit of flow. Consider the example
+below, where <span class="math inline">\(b\)</span> (the circled
+numbers) is a vector of flow and <span class="math inline">\(c\)</span>
+(the numbers near the edges) is a vector of cost values. Assume flow at
+a vertex is 0 unless stated otherwise.</p>
+<div id="section-figure-1-graph-g-v-e-with-flow-b-and-weights-c."
+class="section level4">
+<h4>Figure 1: Graph <span class="math inline">\(G = (V, E)\)</span> with
+flow <span class="math inline">\(b\)</span> and weights <span
+class="math inline">\(c\)</span>.</h4>
+<p><img src="FlowsProjectImages/SampleNetwork.png" style="width:100%" align="center"/></p>
+<p>If a vertex has positive flow, we call it a source, and if a vertex
+has negative flow, we call it a sink. We define Supply, <span
+class="math inline">\(S\)</span> as</p>
+<p><span class="math display">\[
+S = \sum_{\{i : b_i &gt; 0\}} b_i,
+\]</span></p>
+<p>and Demand, <span class="math inline">\(D\)</span> as</p>
+<p><span class="math display">\[
+D = \sum_{\{i: b_i &lt; 0\}} b_i.
+\]</span></p>
+<p>We call a network balanced if <span class="math inline">\(S + D =
+0\)</span>, and an unbalanced network can be made balanced by adding an
+artificial vertex with flow <span class="math inline">\(S - D\)</span>
+via a directed edge with zero cost.</p>
+<p>The goal of the minimum cost network flow problem is to satisfy the
+supply and demand of each vertex while minimizing the cost. Naturally,
+the objective function will look like this,</p>
+<p><span class="math display">\[
+\mathop{\text{minimize: }}_{x} z = c^Tx
+\]</span></p>
+<p>where <span class="math inline">\(x_{i,j} \in x\)</span> represents
+the amount of flow through arc <span class="math inline">\((i,
+j)\)</span>, and we denote <span class="math inline">\(c_{i, j}\)</span>
+as the cost assigned to arc <span class="math inline">\((i, j)\)</span>.
+It’s important to note that at this moment we are thinking of <span
+class="math inline">\(x\)</span> and <span
+class="math inline">\(c\)</span> as vectors, so this indexing is just
+for identifying the corresponding arc, not some location on a matrix. A
+feasible solution to this problem is an <span
+class="math inline">\(x\)</span> which satisfies the supply and demand
+of each vertex. With that context, at each vertex <span
+class="math inline">\(i\)</span>, our <span
+class="math inline">\(x\)</span> must satisfy,</p>
+<p><span class="math display">\[
+\sum_{j} x_{i,j} - \sum_{k} x_{k,i} = b_i.
+\]</span></p>
+<p>One can think of the first sum as flow out of vertex <span
+class="math inline">\(i\)</span> and the second sum as flow into vertex
+<span class="math inline">\(i\)</span>. As an example, consider vertices
+1 and 2 in Figure 1; we get the following constraints:</p>
+<p><span class="math display">\[
+x_{1, 2} + x_{1,3} = 50,
+\]</span></p>
+<p><span class="math display">\[
+x_{2, 4} + x_{2, 6} - x_{1, 2} = 0.
+\]</span></p>
+<p>This is done for each vertex <span class="math inline">\(i\)</span>,
+generating our constraint matrix <span class="math inline">\(A\)</span>,
+which will be of size (number of vertices) <span
+class="math inline">\(\times\)</span> (number of edges). Usually, there
+will be some added constraints <span class="math inline">\(L\)</span>
+and <span class="math inline">\(U\)</span> on the amount of flow that
+can go through each edge (Capacity!!), so most problems will be of the
+form,</p>
+<p><span class="math display">\[
+\begin{align*}
+\mathop{\text{minimize: }}_{x} z &amp;= c^Tx\\
+\text{subject to: }Ax &amp;= b\\
+L \leq &amp;x \leq U
+\end{align*}
+\]</span></p>
+<p>Consider the well-posedness of such a problem, specifically for a
+given <span class="math inline">\(U\)</span> which is small, and an
+assignment of flows <span class="math inline">\(b\)</span> which is very
+large. (This situation has a name, and we typically call an LP problem
+<em>infeasible</em> when this happens).</p>
+</div>
+</div>
+<div id="section-maximum-flow" class="section level1">
+<h1>Maximum Flow</h1>
+<p>Suppose you have a directed graph with <span
+class="math inline">\(m\)</span> vertices but in this case, we only
+consider two special vertices, 1 and <span
+class="math inline">\(m\)</span>, where 1 is the source and <span
+class="math inline">\(m\)</span> is the sink. The weights assigned to
+each arc represent the maximum capacity of flow that can move between
+vertices.</p>
+<p>The goal of a maximum flow network problem is to maximize the amount
+of flow through the source and the sink without overwhelming the
+capacity of the network. So, a solution to the maximum flow network
+problem determines the maximal amount of flow that can be moved from
+source to sink, as well as the routing of that flow across the
+network.</p>
+<p>To formulate the problem as a linear program, let <span
+class="math inline">\(x_{i, j} \in x\)</span> represent the amount of
+flow through arc <span class="math inline">\((i, j)\)</span>, and let
+<span class="math inline">\(u_{i, j}\)</span> represent the capacity of
+arc <span class="math inline">\((i, j)\)</span>. Let <span
+class="math inline">\(f\)</span> be the amount of flow in the network.
+Then our problem can be written in the following form:</p>
+<p><span class="math display">\[
+\begin{align*}
+\mathop{\text{maximize: }}_{x, f} &amp; \quad z = f\\
+\text{subject to: } &amp; \quad \sum_{j} x_{1,j} - \sum_{k} x_{k,1} =
+f,\\
+&amp; \quad \sum_{j} x_{i,j} - \sum_{k} x_{k,i} = 0, \quad i = 2, \dots,
+m - 1,\\
+&amp; \quad \sum_{j} x_{m,j} - \sum_{k} x_{k,m} = -f,\\
+&amp; \quad 0 \leq x_{i,j} \leq u_{i,j}.
+\end{align*}
+\]</span></p>
+<p>Naturally, since we wish to find the maximum flow <span
+class="math inline">\(f\)</span> between vertices 1 and <span
+class="math inline">\(m\)</span> through the network, vertex 1 will have
+a surplus of flow <span class="math inline">\(f\)</span> and vertex
+<span class="math inline">\(m\)</span> will have a demand of flow <span
+class="math inline">\(f\)</span>. Since all the flow is moving from 1 to
+<span class="math inline">\(m\)</span>, all vertices in between must be
+balanced, hence the 0 on the right-hand side of the middle equality
+constraints. Finally, the inequality constraints come from our desire to
+not overwhelm the capacity of the network.</p>
+<p>We can convert the maximum flow problem into a minimum cost network
+flow problem. Suppose we add an artificial arc <span
+class="math inline">\((m, 1)\)</span> with unlimited capacity <span
+class="math inline">\(u_{1, m}\)</span>. Then the problem can be
+reformulated by:</p>
+<p><span class="math display">\[
+\begin{align*}
+\mathop{\text{minimize: }}_{x} &amp; \quad z = -x_{m, 1}\\
+\text{subject to: } &amp; \quad \sum_{j} x_{i,j} - \sum_{k} x_{k,i} = 0,
+\quad i = 1, \dots, m,\\
+&amp; \quad 0 \leq x_{i,j} \leq u_{i,j}.
+\end{align*}
+\]</span></p>
+<p>To see this, let <span class="math inline">\(x_{m,1} = f\)</span> and
+by substitution, the constraints are equivalent. Since minimum cost
+network flow is a minimization problem, we multiply the cost function by
+-1, hence <span class="math inline">\(z = -x_{m,1}\)</span>. To see this
+in the previously stated matrix-vector form of the minimum cost network
+flow problem, let <span class="math inline">\(b = 0\)</span>, let <span
+class="math inline">\(c\)</span> be a one-hot vector with <span
+class="math inline">\(c_{m,1} = -1\)</span>, let <span
+class="math inline">\(L = 0\)</span>, and let <span
+class="math inline">\(U = u\)</span>, a vector of arc capacities. Note
+that the cost <span class="math inline">\(c_{i,j} = 0\)</span> for all
+edges in our graph other than our strategically placed artificial
+arc.</p>
+</div>
+<div id="section-minimum-cut" class="section level1">
+<h1>Minimum Cut</h1>
+<p>Since we’ve described the maximum flow problem as an LP problem, we
+can easily convert it to standard form and construct its dual LP
+problem. From our discussions in class, strong duality states that such
+a dual should compute the minimum cut on this network. Let’s verify that
+for ourselves. Since I’ve suppressed the details of how to convert an LP
+problem to standard form, I’ll simply present you with the dual of the
+original problem and argue it produces the minimum cut:</p>
+<p><span class="math display">\[
+\begin{align*}
+\mathop{\text{minimize: }}_{y, v} &amp; \quad w = \sum u_{i,j} v_{i,j}\\
+\text{subject to: } &amp; \quad y_m - y_1 = 1,\\
+&amp; \quad y_i - y_j + v_{i,j} \geq 0, \quad \text{for all arcs }
+(i,j),\\
+&amp; \quad v_{i,j} \geq 0.
+\end{align*}
+\]</span></p>
+<p>First, let’s define <span class="math inline">\(N_1\)</span> and
+<span class="math inline">\(N_0\)</span> to be the independent sets of
+vertices. We would like our dual variable <span
+class="math inline">\(y_i\)</span> to encode when a vertex is in either
+<span class="math inline">\(y_i \in N_1\)</span> or <span
+class="math inline">\(y_i \in N_0\)</span>. In order to satisfy the
+first constraint, it is clear that <span class="math inline">\(y_m =
+1\)</span> and <span class="math inline">\(y_1 = 0\)</span>, as desired,
+since our source and sink must be separated. We interpret the second
+dual variable <span class="math inline">\(v_{i,j}\)</span> as an
+indicator for if an arc is in the cut set, so <span
+class="math inline">\(v_{i,j} = 1\)</span> if <span
+class="math inline">\(i \in N_1\)</span> and <span
+class="math inline">\(j \in N_0\)</span>, and <span
+class="math inline">\(v_{i,j} = 0\)</span> otherwise. We are pleased to
+find that the objective is what we expect: minimizing a sum of
+capacities over arcs in the cut set. Now, finally, if <span
+class="math inline">\(y_i \in N_0\)</span> and <span
+class="math inline">\(y_j \in N_1\)</span>, we force <span
+class="math inline">\(y_i - y_j = -1\)</span> and in order to stay
+feasible, <span class="math inline">\(v_{i,j} = 1\)</span>; hence, we
+get the desired quality for our indicator <span
+class="math inline">\(v_{i,j}\)</span>. A similar argument shows that
+arcs between vertices in the same set can be added to the cut set as
+well.</p>
+</div>
+<div id="section-shortest-path" class="section level1">
+<h1>Shortest Path</h1>
+<p>The shortest path problem can be represented very simply as a minimum
+cost network flow problem. First, you construct the directed graph in
+the obvious way to model the physical network you are trying to
+traverse. The starting source vertex is ascribed a flow of 1, and the
+ending sink vertex with a flow of -1, defining the <span
+class="math inline">\(c_{i,j}\)</span> as the distance between vertices
+<span class="math inline">\(i\)</span> and <span
+class="math inline">\(j\)</span>.</p>
+<p>As an aside, it should be noted that there are several especially
+efficient algorithms for solving the shortest path problem (A* and
+Dijkstra’s come to mind), and this formulation via a minimum cost
+network flow problem is by no means any better (the method in the
+appendix is a polynomial time algorithm). However, it is more general in
+the sense that the more popular algorithms require that the cost <span
+class="math inline">\(c_{i,j} \geq 0\)</span> and our formulation allows
+us the case where <span class="math inline">\(c_{i,j} &lt; 0\)</span> as
+well. (In fact, it was only recently found that such a negative weight
+efficient near-linear time shortest path algorithm exists.)</p>
+</div>
+<div id="section-assignment" class="section level1">
+<h1>Assignment</h1>
+<p>Let’s recall the premise of the stable matching problem, where a
+collection of medical students are applying to medical residencies and
+instead of creating a list of preferences, the students decide to
+ascribe a happiness score <span class="math inline">\(c_{i,j}\)</span>
+for which the <span class="math inline">\(i^{th}\)</span> student would
+attain should they be accepted to the <span
+class="math inline">\(j^{th}\)</span> program. You can think of this as
+a sort of weighted preference list. The goal of the assignment problem
+is to assign each student to a program and maximize the total amount of
+‘happiness’.</p>
+<p>Again, the graph is constructed in the usual way, as a complete
+bipartite graph with one part representing students and another
+representing medical residencies (it is necessary to have equal parts).
+Every student source vertex is ascribed a flow of 1, and every school
+sink vertex with a flow of -1. We assign the costs as expected using the
+happiness score <span class="math inline">\(c_{i,j}\)</span>; however,
+this time we want to maximize the objective function.</p>
+</div>
+<div id="section-applications-in-image-segmentation"
+class="section level1">
+<h1>Applications in Image Segmentation</h1>
+<p>Extending our discussion of Flow Problems, I’d like to discuss a
+particularly interesting application of the Max-Flow/Min-Cut problem in
+the field of computer vision. Image segmentation is the process by which
+the subject and background of an image are identified. To apply our
+knowledge about flow problems, we would hope to define a graph where
+each vertex represents a pixel or some portion of the image, and
+capacities, source vertices, and sink vertices such that the Min-Cut
+separates our subject from the background.</p>
+<p>This idea is called ‘Lazy Snapping’ and it works by first presenting
+a user with an image. The user then selects a small portion of the
+subject in the image to be source pixels, and another portion of the
+background to be sink pixels. Then the goal is to find the assignment
+<span class="math inline">\(X\)</span> of pixels into two classes where
+<span class="math inline">\(X(x_i) = 1\)</span> (subject) or <span
+class="math inline">\(X(x_i) = 0\)</span> (background) which minimizes
+the following energy function:</p>
+<p><span class="math display">\[
+E(X) = \sum_{i \in V} E_1(x_i) + \lambda \sum_{(i, j) \in E} E_2(x_i,
+x_j).
+\]</span></p>
+<p>There is a substantial amount of details which I will suppress, but
+essentially <span class="math inline">\(E_1\)</span> is defined in such
+a way that <span class="math inline">\(\sum_{i \in V} E_1(x_i)\)</span>
+is small if pixels of the same class are the same color. Also, <span
+class="math inline">\(E_2\)</span> is constructed such that it only
+takes on positive values for which <span
+class="math inline">\(x_i\)</span> and <span
+class="math inline">\(x_j\)</span> are in different classes; otherwise,
+it is zero. It is larger when the two colors are similar and smaller
+when they are dissimilar. Having described the energy function in this
+way, there should be a feeling that minimizing <span
+class="math inline">\(E\)</span> must separate a subject from its
+background. Actually producing the capacities for such a graph and
+proving that the Min-Cut algorithm minimizes this energy function will
+be left to the following references.</p>
+</div>
+<div id="section-network-simplex" class="section level1">
+<h1>Network Simplex</h1>
+<div id="section-feasibility" class="section level2">
+<h2>Feasibility</h2>
+<p>The crux of the network simplex method lies in two key ideas, which
+we will explore in the context of a minimum cost network flow problem
+with only positivity constraints. Let <span class="math inline">\(G =
+(V, E)\)</span> be a network on <span class="math inline">\(m\)</span>
+vertices and recall the minimum cost network flow problem:</p>
+<p><span class="math display">\[
+\begin{align*}
+\mathop{\text{minimize: }}_{x} z &amp;= c^Tx\\
+\text{subject to: } Ax &amp;= b\\
+x &amp;\geq 0
+\end{align*}
+\]</span></p>
+<p>By our definition of <span class="math inline">\(x_{i,j} \in
+x\)</span> as the flow between arc <span
+class="math inline">\((i,j)\)</span>, we know that the columns of our
+constraint matrix <span class="math inline">\(A\)</span> represent the
+arcs in our network. Since we constructed each row of our matrix <span
+class="math inline">\(A\)</span> as an equation which models the flow
+across a single vertex, we know that each row represents a vertex. So,
+in the column view, a column representing arc <span
+class="math inline">\((i,j)\)</span> will have a 1 in the row
+representing vertex <span class="math inline">\(i\)</span> and a -1 in
+the row representing vertex <span class="math inline">\(j\)</span>. In
+the row view, a row representing vertex <span
+class="math inline">\(i\)</span> will have a 1 in every column
+representing arc <span class="math inline">\((i,k)\)</span> and a -1 in
+every column representing arc <span
+class="math inline">\((k,i)\)</span>, where <span
+class="math inline">\(k \in V\)</span>. Hence, the constraint matrix is
+a directed incidence matrix. The first big idea comes as the following
+theorem:</p>
+<div class="theorem" text="Theorem 1:">
+<p>Let <span class="math inline">\(B\)</span> be a submatrix of the
+constraint matrix <span class="math inline">\(A\)</span> whose columns
+represent the edges of a spanning tree. Then <span
+class="math inline">\(B\)</span> is a full column rank matrix with
+dimension <span class="math inline">\(m \times (m - 1)\)</span>, and it
+can be rearranged so that the diagonal entries are <span
+class="math inline">\(\pm 1\)</span>.</p>
+</div>
+<p><br />
+There is a sense that this result feels intuitive. Clearly, a spanning
+tree on a connected graph with <span class="math inline">\(m\)</span>
+vertices must have <span class="math inline">\(m - 1\)</span> arcs.
+Showing that <span class="math inline">\(B\)</span> can be rearranged
+follows by a proof by induction (you can find it on p.285 of Griva).</p>
+<p>Recall that a basic solution <span class="math inline">\(x\)</span>
+to a general LP problem has non-zero entries, whose corresponding
+columns in the constraint matrix <span class="math inline">\(A\)</span>
+are linearly independent, and <span class="math inline">\(x\)</span>
+satisfies the equality constraints. We define a <em>spanning tree
+solution</em> <span class="math inline">\(x\)</span> as a solution to
+the system <span class="math inline">\(Ax = b\)</span> where the
+non-zero entries of <span class="math inline">\(x\)</span> correspond to
+columns of <span class="math inline">\(A\)</span> which represent a
+spanning tree. A <em>feasible spanning tree solution</em> is simply a
+spanning tree solution which also satisfies the positivity constraints,
+<span class="math inline">\(x \geq 0\)</span>. The next big idea uses
+the previous theorem and definitions about spanning trees and connects
+them to LP:</p>
+<div class="theorem" text="Theorem 2:">
+<p>A flow <span class="math inline">\(x\)</span> is a basic feasible
+solution for the network flow constraints <span class="math inline">\(Ax
+= b\)</span> and <span class="math inline">\(x \geq 0\)</span> if and
+only if it is a feasible spanning tree solution.</p>
+</div>
+<p><br />
+</p>
+<p>The backwards direction follows directly from the previous Theorem 1
+and the definition of a feasible spanning tree solution. The forwards
+direction proceeds by contradiction. Suppose <span
+class="math inline">\(x\)</span> is a basic feasible solution and not a
+feasible spanning tree solution. If <span
+class="math inline">\(x\)</span> is not a spanning tree, then it must
+have a cycle. Choose a vertex <span class="math inline">\(i\)</span> in
+the cycle; it must have arcs <span class="math inline">\((i,j)\)</span>
+and <span class="math inline">\((k,i)\)</span> for some <span
+class="math inline">\(k\)</span> and <span
+class="math inline">\(j\)</span> in the cycle. The flow across an arc
+<span class="math inline">\((i,j)\)</span> in the cycle may be increased
+by some <span class="math inline">\(\epsilon \geq 0\)</span>, and in
+order to stay feasible, we must decrease the flow across the arc <span
+class="math inline">\((k,i)\)</span>. So we have a new flow <span
+class="math inline">\(x_{\epsilon}\)</span>, and we can construct
+another flow <span class="math inline">\(x_{-\epsilon}\)</span> by
+subtracting <span class="math inline">\(\epsilon\)</span> from the flow
+across <span class="math inline">\((i,j)\)</span> and adding <span
+class="math inline">\(\epsilon\)</span> to <span
+class="math inline">\((k,i)\)</span>.</p>
+<p>Finally, note that:</p>
+<p><span class="math display">\[
+x = \frac{1}{2} x_{\epsilon} + \frac{1}{2} x_{-\epsilon}.
+\]</span></p>
+<p>Therefore, <span class="math inline">\(x\)</span> is not an extreme
+point in the feasible set, and by the Fundamental Theorem of Linear
+Programming, <span class="math inline">\(x\)</span> is not a basic
+feasible solution.</p>
+</div>
+<div id="section-the-network-simplex-method" class="section level2">
+<h2>The Network Simplex Method</h2>
+<p>The network simplex method proceeds in a similar fashion to the
+general simplex method with a few improvements on how we compute each
+step. First, note that we must initialize the algorithm, just like the
+regular simplex method, with a basic feasible solution. One could
+conceivably implement the first step problem to find a BFS. Like in the
+regular simplex method, we’ll need to form our Basis and Null matrices
+<span class="math inline">\(B\)</span> and <span
+class="math inline">\(N\)</span> respectively. As we have shown in the
+previous section, our <span class="math inline">\(B\)</span> matrix will
+be full column rank with dimension <span class="math inline">\(m \times
+(m - 1)\)</span> and the <span class="math inline">\(N\)</span> matrix
+will have columns which represent all the arcs that didn’t show up in
+our feasible spanning tree. Recall that the first step in the simplex
+method is to compute simplex multipliers <span
+class="math inline">\(y\)</span> by solving the system,</p>
+<p><span class="math display">\[
+B^T y = c.
+\]</span></p>
+<p>Here is where we can take advantage of Theorem 1 to make solving this
+system faster. Note that <span class="math inline">\(B^T\)</span> is a
+full row rank <span class="math inline">\((m - 1) \times m\)</span>
+matrix, so we are guaranteed when solving <span
+class="math inline">\(B^T y = c\)</span> to have a free variable. Since
+<span class="math inline">\(B^T\)</span> is a matrix whose rows now
+represent edges, solving this system by back substitution produces the
+following expression,</p>
+<p><span class="math display">\[
+y_i - y_j = c_{i,j}
+\]</span></p>
+<p>where <span class="math inline">\(y_i\)</span> and <span
+class="math inline">\(y_j\)</span> are the simplex multipliers
+associated with vertices <span class="math inline">\(i\)</span> and
+<span class="math inline">\(j\)</span>, and <span
+class="math inline">\(c_{i,j}\)</span> is the cost associated with arc
+<span class="math inline">\((i,j)\)</span>. This means that we can
+compute the simplex multipliers by selecting a vertex <span
+class="math inline">\(i\)</span> to correspond to our free simplex
+multiplier, so we will let <span class="math inline">\(y_i = 0\)</span>
+and compute the rest <span class="math inline">\(y_j\)</span> by
+traversing the feasible spanning tree and computing <span
+class="math inline">\(y_j = y_i - c_{i,j}\)</span> along the way.</p>
+<p>Computing the reduced costs is no different from the regular simplex
+method. We use <span class="math inline">\(\hat{c}_{i,j} = c_{i,j} - N^T
+y\)</span>. Again, choosing which arc becomes the new entering arc is no
+different: simply find the minimum <span
+class="math inline">\(\hat{c}_{i,j}\)</span> and consider the
+corresponding arc <span class="math inline">\(x_{i,j}\)</span> in the
+columns of <span class="math inline">\(N\)</span>. Then we check our
+optimality conditions just as before: are <span
+class="math inline">\(\hat{c}_{i,j} \geq 0\)</span>.</p>
+<p>To choose our leaving arc, we will be taking advantage of Theorem 2
+and a small result about spanning trees. Taking our entering arc <span
+class="math inline">\(x_{i,j}\)</span> and adding it into our spanning
+tree graph, it is guaranteed that this will produce a single undirected
+cycle that includes the arc <span
+class="math inline">\(x_{i,j}\)</span>. By Theorem 2, adding this arc
+<span class="math inline">\(x_{i,j}\)</span> into our solution makes us
+no longer basic. In order to stay feasible and basic, we must remove an
+arc from the cycle to get back to a spanning tree and increase the flow
+through <span class="math inline">\(x_{i,j}\)</span> an appropriate
+amount to satisfy our equality constraints. Here’s the trick: locate the
+edges in the cycle which point in the opposite direction as <span
+class="math inline">\(x_{i,j}\)</span>; we’ll call them negative edges.
+Let <span class="math inline">\(m\)</span> be the minimum flow through
+those negative edges. Set <span class="math inline">\(x_{i,j} =
+m\)</span> and subtract <span class="math inline">\(m\)</span> from all
+negative <span class="math inline">\(x_{l,k}\)</span> in the cycle. This
+operation maintains basic feasibility since the minimum flow <span
+class="math inline">\(x_{l,k}\)</span> arc gets removed from our
+solution, becoming our exiting variable, and our entering variable is
+increased enough to satisfy the equality constraints. Also, note that if
+there is no minimum flow <span class="math inline">\(x_{l,k}\)</span>,
+and <span class="math inline">\(x_{i,j}\)</span> can be increased
+arbitrarily, then the problem is unbounded, just like in the regular
+simplex method.</p>
+<p>The steps are then repeated with the new feasible spanning tree
+solution until we achieve the optimality conditions.</p>
+</div>
+<div id="section-implementation" class="section level2">
+<h2>Implementation</h2>
+<p>Consider the example defined in Figure 2, of a positively constrained
+minimum cost network flow problem.</p>
+<div
+id="section-figure-2-our-given-network-which-defines-a-and-b-by-network-structure-and-flow."
+class="section level4">
+<h4>Figure 2: Our given network which defines A and b, by network
+structure and flow.</h4>
+<p><img src="FlowsProjectImages/untitled.png" style="width:100%" align="center"/></p>
+</div>
+<div
+id="section-figure-3-initial-feasible-spanning-tree-shown-in-green.-red-is-the-entering-arc-for-this-first-iteration."
+class="section level4">
+<h4>Figure 3: Initial feasible spanning tree shown in green. Red is the
+entering arc for this first iteration.</h4>
+<p><img src="FlowsProjectImages/step1.png" style="width:100%" align="center"/></p>
+<p>Our initial feasible spanning tree solution is outlined in green in
+Figure 3. Again, the equations for computing the simplex multipliers
+allow us to simply set the multiplier associated with vertex 1 to zero,
+so we get <span class="math inline">\(y_1 = 0\)</span>. To solve the
+next multiplier, we traverse the green spanning tree to vertex 3 and in
+doing so we solve for <span class="math inline">\(y_3\)</span> with
+<span class="math inline">\(y_3 = y_2 - c_{1,3} = 0 - 5 = -5\)</span>.
+Solving the next multiplier, we get <span class="math inline">\(y_4 =
+y_3 - c_{3,4} = -5 - 4 = -9\)</span> and so on.</p>
+<p>Once we have the simplex multipliers together, we can solve for the
+reduced costs of the non-basic arcs. Doing so, we can check our
+optimality conditions, and in this case, there exist negative reduced
+costs, so we continue. You’ll find that the reduced cost for <span
+class="math inline">\(x_{3,6}\)</span> (marked in red in Figure 3) is
+the lowest among the negative reduced costs and therefore becomes our
+entering arc.</p>
+<p>To solve for our exiting arc, consider the cycle formed by vertices
+<span class="math inline">\(\{3, 4, 6\}\)</span>. Note that <span
+class="math inline">\(x_{3,6}\)</span> is pointing in the
+counterclockwise direction, and therefore we designate arcs <span
+class="math inline">\(x_{3,4}\)</span> and <span
+class="math inline">\(x_{4,6}\)</span> as negative. Note that the
+minimum flow across the negative arcs is equal, so when we subtract that
+flow from <span class="math inline">\(x_{3,4}\)</span> and <span
+class="math inline">\(x_{4,6}\)</span> and add it to <span
+class="math inline">\(x_{3,6}\)</span>, both <span
+class="math inline">\(x_{3,4}\)</span> and <span
+class="math inline">\(x_{4,6}\)</span> will be zero and we will get to
+choose which of the two arcs becomes our exiting arc.</p>
+<p>Choosing <span class="math inline">\(x_{3,4}\)</span> to be the
+exiting arc and setting <span class="math inline">\(x_{3,6} =
+10\)</span>, we arrive at the next feasible spanning tree solution.
+Figure 4 shows the final iteration of this problem; the working out is
+left as an exercise to the reader.</p>
+</div>
+<div
+id="section-figure-4-in-green-is-the-resultant-spanning-tree-from-the-first-iteration.-in-red-is-the-next-entering-arc-for-the-second-iteration."
+class="section level4">
+<h4>Figure 4: In green is the resultant spanning tree from the first
+iteration. In red is the next entering arc for the second
+iteration.</h4>
+<p><img src="FlowsProjectImages/step2.png" style="width:100%" align="center"/></p>
+<p>You’ll find code and an example for running this method on positively
+constrained minimum cost flow network problems on my GitHub page.</p>
+</div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("section-TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+<script>
+$(document).ready(function ()  {
+
+    // temporarily add toc-ignore selector to headers for the consistency with Pandoc
+    $('.unlisted.unnumbered').addClass('toc-ignore')
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_');
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#section-TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

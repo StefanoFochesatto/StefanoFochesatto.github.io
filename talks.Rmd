@@ -9,12 +9,6 @@ pagetitle: "Stefano Fochesatto"
 
 ### Contributed
 
-2022 Mathematics of Machine Learning, Fairbanks, AK: [*Decision Tree Learning from Scratch*](https://bueler.github.io/M692S22/slides/fochesatto-decisiontree.pdf)
-
-[Colab Notebook (code)](https://colab.research.google.com/drive/13DB1YlYSAZs6PdZdt9Zbs7RI9Nk4RKMn?usp=sharing)
-
----
-
 2021 History and Philosophy of Mathematics, Fairbanks, AK: [*Approximating Pi; A Brief Study on Approximating Methods*](https://github.com/StefanoFochesatto/MATH-316/blob/main/Approximation%20Pi%20Presentation.pdf)
 
 ---
@@ -32,3 +26,17 @@ pagetitle: "Stefano Fochesatto"
 2022 Botany: Plants to the Extreme! Anchorage, AK [Using deep learning with digitized herbarium specimen image data.](https://github.com/StefanoFochesatto/Botany2022_DLworkshop)
 
 [Abstract](https://2022.botanyconference.org/engine/search/index.php?func=detail&aid=8)
+
+---
+
+2022 Mathematics of Machine Learning, Fairbanks, AK: [Decision Tree Learning from Scratch](https://bueler.github.io/M692S22/slides/fochesatto-decisiontree.pdf)
+
+[Colab Notebook (code)](https://colab.research.google.com/drive/13DB1YlYSAZs6PdZdt9Zbs7RI9Nk4RKMn?usp=sharing)
+
+---
+
+2023 Graph Theory (Graduate), Fairbanks, AK: [Flows in Optimization](https://github.com/StefanoFochesatto/Homework-Fall-2023/blob/main/Graph%20Theory/Network%20Flow%20Project/Presentation/Presentation.pdf)
+ 
+---
+
+2024 Finite Element Seminar, Fairbanks, AK: [Obstacle Problem](https://bueler.github.io/fe-seminar/slides/28mar-sfochesatto.pdf)

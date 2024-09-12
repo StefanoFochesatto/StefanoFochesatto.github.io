@@ -305,6 +305,7 @@ $(document).ready(function () {
 <style>
 .card-container {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     margin-top: 20px;
 }
@@ -315,10 +316,11 @@ $(document).ready(function () {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
-    width: 45%;
+    width: 48%;
     box-sizing: border-box;
     text-align: center;
     transition: transform 0.3s;
+    margin-bottom: 20px; /* Adds space between rows */
 }
 
 .card:hover {
@@ -347,19 +349,29 @@ $(document).ready(function () {
 .card a:hover {
     text-decoration: underline;
 }
+
+@media (max-width: 768px) {
+    .card {
+        width: 100%;
+    }
+}
 </style>
 <hr />
 <div class="card-container">
 <div class="card">
-<p><img src="images/PreProcessingPipeline.png" style="width:90%; border: 2px solid #4582ec; border-radius: 8px; padding: 5px; margin: 0 auto 15px; display: block;"></p>
+<p><img src="images/PreProcessingPipeline.png" style="width:90%; border: 2px solid #4582ec; border-radius: 8px; padding: 5px; margin: 0 auto 15px; display: block;">
 <a href="PlantResearch.html">Deep Learning Image Clustering to Aid
-Species Delimitation Within the Vitis Arizonica Complex</a>
+Species Delimitation Within the Vitis Arizonica Complex</a></p>
 </div>
 <div class="card">
-<img src="CRRELReportImages/OurModel.jpg" 
-             style="width:90%; border: 2px solid #4582ec; border-radius: 8px; padding: 5px; margin: 0 auto 15px; display: block;">
+<p><img src="CRRELReportImages/OurModel.jpg" style="width:90%; border: 2px solid #4582ec; border-radius: 8px; padding: 5px; margin: 0 auto 15px; display: block;">
 <a href="SolarResearch.html">Cold Regions Research and Engineering Lab
-Solar Panel Imaging Project</a>
+Solar Panel Imaging Project</a></p>
+</div>
+<div class="card">
+<p><img src="FlowsProjectImages/step2.png" style="width:90%; border: 2px solid #4582ec; border-radius: 8px; padding: 5px; margin: 0 auto 15px; display: block;">
+<a href="FlowsOptim.html">Flows from and Optimization
+Perspective</a></p>
 </div>
 </div>
 
