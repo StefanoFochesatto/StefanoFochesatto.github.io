@@ -75,7 +75,7 @@ description: "Research Page"
 
 <div class="card">
   <img src="FlowsProjectImages/step2.png" style="width:90%; border: 2px solid #4582ec; border-radius: 8px; padding: 5px; margin: 0 auto 15px; display: block;">
-  <a href="FlowsOptim.html">Flows from and Optimization Perspective</a>
+  <a href="FlowsOptim.html">Flows From and Optimization Perspective</a>
 </div>
 </div>
 
