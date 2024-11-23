@@ -5,7 +5,7 @@ output:
         toc: TRUE
         toc_float: TRUE
 runtime: shiny
-description: "Cold Regions Research and Engineering Lab Solar Panel Imaging Project"
+description: "Graph theory project"
 ---
 
 ```{=html}
@@ -28,6 +28,8 @@ description: "Cold Regions Research and Engineering Lab Solar Panel Imaging Proj
 .theorem p {
   display: inline;
 }
+
+
 </style>
 ```
 # Introduction
@@ -212,7 +214,14 @@ $$
 E(X) = \sum_{i \in V} E_1(x_i) + \lambda \sum_{(i, j) \in E} E_2(x_i, x_j).
 $$
 
-There is a substantial amount of details which I will suppress, but essentially $E_1$ is defined in such a way that $\sum_{i \in V} E_1(x_i)$ is small if pixels of the same class are the same color. Also, $E_2$ is constructed such that it only takes on positive values for which $x_i$ and $x_j$ are in different classes; otherwise, it is zero. It is larger when the two colors are similar and smaller when they are dissimilar. Having described the energy function in this way, there should be a feeling that minimizing $E$ must separate a subject from its background. Actually producing the capacities for such a graph and proving that the Min-Cut algorithm minimizes this energy function will be left to the following references.
+There is a substantial amount of details which I will suppress, but essentially $E_1$ is defined in such a way that $\sum_{i \in V} E_1(x_i)$ is small if pixels of the same class are the same color. Also, $E_2$ is constructed such that it only takes on positive values for which $x_i$ and $x_j$ are in different classes; otherwise, it is zero. It is larger when the two colors are similar and smaller when they are dissimilar. Having described the energy function in this way, there should be a feeling that minimizing $E$ must separate a subject from its background. Actually producing the capacities for such a graph and proving that the Min-Cut algorithm minimizes this energy function will be left to the references in the demo below,
+
+<iframe
+	src="https://gsfochesatto-graphcutsegmentation.hf.space"
+	frameborder="0"
+	width="850"
+	height="1000">
+	</iframe>
 
 # Network Simplex
 
