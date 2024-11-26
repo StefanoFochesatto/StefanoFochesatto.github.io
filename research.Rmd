@@ -64,10 +64,7 @@ description: "Research Page"
 ---
 
 <div class="card-container">
-<div class="card">
-  <img src="images/PreProcessingPipeline.png" style="width:90%; border: 2px solid #4582ec; border-radius: 8px; padding: 5px; margin: 0 auto 15px; display: block;">
-  <a href="PlantResearch.html">Deep Learning Image Clustering to Aid Species Delimitation Within the Vitis Arizonica Complex</a>
-</div>
+
 <div class="card">
   <img src="CRRELReportImages/OurModel.jpg" style="width:90%; border: 2px solid #4582ec; border-radius: 8px; padding: 5px; margin: 0 auto 15px; display: block;">
     <a href="SolarResearch.html">Cold Regions Research and Engineering Lab Solar Panel Imaging Project</a>
@@ -77,6 +74,13 @@ description: "Research Page"
   <img src="FlowsProjectImages/step2.png" style="width:90%; border: 2px solid #4582ec; border-radius: 8px; padding: 5px; margin: 0 auto 15px; display: block;">
   <a href="FlowsOptim.html">Flows From an Optimization Perspective</a>
 </div>
+
+<div class="card">
+  <img src="images/PreProcessingPipeline.png" style="width:90%; border: 2px solid #4582ec; border-radius: 8px; padding: 5px; margin: 0 auto 15px; display: block;">
+  <a href="PlantResearch.html">Deep Learning Image Clustering to Aid Species Delimitation Within the Vitis Arizonica Complex</a>
+</div>
+
+
 </div>
 
 

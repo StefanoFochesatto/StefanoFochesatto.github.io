@@ -8,6 +8,7 @@ runtime: shiny
 description: "Graph theory project"
 ---
 
+
 ```{=html}
 <style>
 .theorem {
@@ -28,10 +29,11 @@ description: "Graph theory project"
 .theorem p {
   display: inline;
 }
-
-
 </style>
 ```
+
+
+
 # Introduction
 
 Network problems most naturally arise in the study of optimization and operations research. A typical graph theory student will have seen that finding the maximum flow though a network tells us where our network has a bottleneck in capacity and such a problem naturally arises in applications such as the design of physical networks for road systems and other utilities. Now clearly this single problem does not tell the whole story. For example say you actually have specific amount of total flow which is obviously less than or equal to the maximum, and that you would like to distribute from source to sink in some optimal way. To discuss such problems it is perhaps more intuitive to consider an optimization (specifically linear programming) based approach, rather than a graph theoretic approach.
