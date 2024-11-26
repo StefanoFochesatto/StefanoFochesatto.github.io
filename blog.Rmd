@@ -13,7 +13,7 @@ editor_options:
 <style>
 .vertical-video-container img {
     width: auto;
-    height: 100%; /* Fit GIF vertically */
+    height: auto; /* Fit GIF vertically */
     max-height: 80vh; /* Adjust as needed */
     border-radius: 8px; /* Optional: rounded corners */
     display: block; /* Ensures no extra space below image */
