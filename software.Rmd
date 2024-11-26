@@ -7,11 +7,22 @@ description: "Custom Borders for 'geoR' Package Objects"
 <link rel="stylesheet" href="styles.css" type="text/css">
 <link rel="stylesheet" href="academicicons/css/academicons.min.css"/>
 
+### Leaf Segmentation Tool
+This script is essentially a polygonal cropping tool, but was made to facilitate the preprocessing step of herbarium sheets as outlined during the [presentation at Botony 2022](https://stefanofochesatto.github.io/files/DeepLearningImageClusteringBotany2022.pdf). The script begins by prompting the user for their images directory, then the first image is displayed. The user selects a bounding box with the cursor and the space button is used to crop. Pressing the escape key proceeds to the next image where the user can again crop as desired. 
+Below is an example of how the script displays and image, the user then selects bounding boxes in cyan, and the resultant leaf level masks. This tool and further documentation can be found [here](https://github.com/StefanoFochesatto/Leaf-Segmentation-Tool).
+
+<img src="images/SegmentationTool.png" style="width:95%; border: 2px solid #4582ec;
+                                                border-radius: 4px;
+                                                border-radius: 8px" align="center">
+                                                
+
+---
+
 ### Custom Borders for 'geoR' Package Objects.
 The following *get_borders(my.lonlat, concavity_param, frac)* function finds the concave hull of your geoR data object, and generates 
-a nice bouding border for your geoR object. 
+a nice bounding border for your geoR object. 
 
-[*get_borders()*](https://github.com/StefanoFochesatto/Homework-Spring-2022/blob/main/Spatial%20Statistics/get_borders.r) *modified from Dr.Margaret Short's Code*
+[*get_borders()*](https://github.com/StefanoFochesatto/Homework-Spring-2022/blob/main/Spatial%20Statistics/get_borders.r)
 
 The function takes three parameters, my.lonlat, concavity_param, and frac. 
 The my.lonlat parameter is simply a 2 column matrix of your lon,lat data. The concavity_param argument is a relative measure of concavity. When set to 1 we get a concave hull, for sufficiently large concavity_param we get the convex hull. The frac argument extends the border in every direction. The function uses the geoR, concaveman, and rgeos packages. The following is an example, and results.

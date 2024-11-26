@@ -7,8 +7,34 @@ pagetitle: "Stefano Fochesatto"
 <link rel="stylesheet" href="academicicons/css/academicons.min.css"/>
 
 
-## Soul Glo Track Highlights
-Soul Glo is a radio show that I DJ at the UAF student radio, KSUA 91.5 FM. I mainly play R&B music, from old school mowtown like The Impressions to more contemporary electro-soul like Busty and The Bass. You can hear it live most Tuesday's from 3:30 to 4:30 through the airwaves or online at the station's [homepage](https://www.ksuaradio.com/). 
+## DJ Soul Glo
+
+Soul Glo is a radio show that I DJ at the UAF student radio, KSUA 91.5 FM. I mainly play R&B music, from old school mowtown like The Impressions to more contemporary electro-soul like Busty and The Bass. You can hear it live most Tuesday's from 7 to 8 AKST through the airwaves or online at the station's [homepage](https://www.ksuaradio.com/). 
+
+---
+
+### Sticker Design Competition 
+
+In Fall 2023 KSUA held a sticker design competition. Myself and DJ Jimmy (host of Brushing My Teeth to Merzbow) submitted the following designs and a few of them won.
+
+
+<img src="images/KSUA_Alaska.JPEG" style="width:60%; border: 2px solid #4582ec;
+                                                border-radius: 4px;
+                                                border-radius: 8px" align="center">
+                                                
+                                                
+<img src="images/KSUA_Japan.JPEG" style="width:60%; border: 2px solid #4582ec;
+                                                border-radius: 4px;
+                                                border-radius: 8px" align="center">
+                                                
+                         
+<img src="images/KSUA_NYC.JPEG" style="width:60%; border: 2px solid #4582ec;
+                                                border-radius: 4px;
+                                                border-radius: 8px" align="center">
+                         
+
+
+
 
 ---
 
