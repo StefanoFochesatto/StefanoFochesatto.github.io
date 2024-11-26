@@ -1,11 +1,48 @@
 ---
 title: " "
 pagetitle: "Stefano Fochesatto"
-description: "Custom Borders for 'geoR' Package Objects"
+description: "Small Programming Scripts and Projects"
 ---
 
 <link rel="stylesheet" href="styles.css" type="text/css">
 <link rel="stylesheet" href="academicicons/css/academicons.min.css"/>
+
+```{=html}
+<style>
+.vertical-video-container img {
+    width: auto;
+    height: auto; /* Fit GIF vertically */
+    max-height: 80vh; /* Adjust as needed */
+    border-radius: 8px; /* Optional: rounded corners */
+    display: block; /* Ensures no extra space below image */
+    margin: 0 auto;
+}
+</style>
+```
+
+### Adaptive Mesh Refinement for Variational Inequalities
+
+The subject of my master's research has been developing methods of adaptive mesh refinement for variational inequalities. The methods we developed were implemented using the Firedrake and Netgen libraries. For more information visit the [repo](https://github.com/StefanoFochesatto/VI-AMR) and check out the paper (coming soon).  
+
+:::::::::::::: {.columns}
+::: {.column width="50%"}
+<img src="images/animated_mesh.gif" alt="Vertical GIF" style="width:80%; border: 2px solid #4582ec;
+                                                border-radius: 4px;
+                                                border-radius: 8px" align="center">
+:::
+::: {.column width="50%"}
+<img src="images/Solution.png" style="width:70%; border: 2px solid #4582ec;
+                                                border-radius: 4px;
+                                                border-radius: 8px" align="center">
+                                                
+<img src="images/animated_surface.gif" alt="Vertical GIF" style="width:80%; border: 2px solid #4582ec;
+                                                border-radius: 4px;
+                                                border-radius: 8px" align="center">
+:::
+::::::::::::::
+
+
+---
 
 ### Leaf Segmentation Tool
 This script is essentially a polygonal cropping tool, but was made to facilitate the preprocessing step of herbarium sheets as outlined during the [presentation at Botony 2022](https://stefanofochesatto.github.io/files/DeepLearningImageClusteringBotany2022.pdf). The script begins by prompting the user for their images directory, then the first image is displayed. The user selects a bounding box with the cursor and the space button is used to crop. Pressing the escape key proceeds to the next image where the user can again crop as desired. 
@@ -15,7 +52,6 @@ Below is an example of how the script displays and image, the user then selects 
                                                 border-radius: 4px;
                                                 border-radius: 8px" align="center">
                                                 
-
 ---
 
 ### Custom Borders for 'geoR' Package Objects.
