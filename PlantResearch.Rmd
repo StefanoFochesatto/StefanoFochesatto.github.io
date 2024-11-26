@@ -175,7 +175,7 @@ From here we take the initial mask and use Photoshop to erase the color bar, pla
 <img src="images/PreProcessingWorkflow.png" style="width:100%" align="center">
 
 ### Processing for Cluster Algorithm
-Given the large file size of the post-Photoshop segmentation mask, and the fact that they are not instance-segmentation masks it makes more sence to try and cluster the images on a leaf segmentation mask level. To do so some more preproccessing is required to prepare the images. First we resized the large segmentation masks, to about half size. We tested several resizing methods and found that Bit exact nearest neighbor interpolation was able to best retain information about edge morphology, for our dataset. 
+Given the large file size of the post-Photoshop segmentation mask, and the fact that they are not instance-segmentation masks it makes more sense to try and cluster the images on a leaf segmentation mask level. To do so some more preproccessing is required to prepare the images. First we resized the large segmentation masks, to about half size. We tested several resizing methods and found that Bit exact nearest neighbor interpolation was able to best retain information about edge morphology, for our dataset. 
 
 A custom script was written iterate through the resized segmentation mask images and crop out instances of high quality leafs to be used for the image clustering (Code to this script will be added to the programming tab). Finally the leaf instance segmentation were padded to retain information about relative size, while normalizing and squaring up the images for the clustering algorithm. 
 
