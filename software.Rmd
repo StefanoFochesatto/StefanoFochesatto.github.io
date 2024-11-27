@@ -22,7 +22,7 @@ description: "Small Programming Scripts and Projects"
 
 ### Adaptive Mesh Refinement for Variational Inequalities
 
-The subject of my master's research has been developing methods of adaptive mesh refinement for variational inequalities. The methods we developed were implemented using the Firedrake and Netgen libraries. For more information visit the [repo](https://github.com/StefanoFochesatto/VI-AMR) and check out the paper (coming soon).  
+My master's research focuses on developing methods for adaptive mesh refinement in variational inequalities. These methods were implemented using the Firedrake and Netgen libraries. For more details, visit the [repository](https://github.com/StefanoFochesatto/VI-AMR), and keep an eye out for the upcoming paper.
 
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
@@ -41,10 +41,28 @@ The subject of my master's research has been developing methods of adaptive mesh
 :::
 ::::::::::::::
 
+---
+
+### Graph Cut Image Segmentation
+
+Throughout my master’s degree, I focused on projects at the intersection of graph theory and numerical methods. During my time at the Museum of the North Herbarium lab and the Cold Regions Research and Engineering Laboratory, I primarily worked on computer vision methods, including segmentation, object detection, clustering, and landmark detection.
+
+To unify the concepts I learned in my graduate graph theory course, I presented several formulations of graph flow problems as linear programming problems, along with the theory behind the network simplex method. These methods intersect interestingly in applications like graph cut image segmentation. Below is a demonstration I created for the class, implementing the techniques described in [Li et al. (2004)](https://www.researchgate.net/publication/220183511_Lazy_snapping).
+
+<iframe src="https://gsfochesatto-graphcutsegmentation.hf.space"
+	frameborder="0"
+	width="850"
+	height="950"
+	style="width:90%; border: 2px solid #4582ec;
+                                                border-radius: 4px;
+                                                border-radius: 8px" align="center">
+	</iframe>
+
 
 ---
 
 ### Leaf Segmentation Tool
+
 This script is essentially a polygonal cropping tool, but was made to facilitate the preprocessing step of herbarium sheets as outlined during the [presentation at Botony 2022](https://stefanofochesatto.github.io/files/DeepLearningImageClusteringBotany2022.pdf). The script begins by prompting the user for their images directory, then the first image is displayed. The user selects a bounding box with the cursor and the space button is used to crop. Pressing the escape key proceeds to the next image where the user can again crop as desired. 
 Below is an example of how the script displays and image, the user then selects bounding boxes in cyan, and the resultant leaf level masks. This tool and further documentation can be found [here](https://github.com/StefanoFochesatto/Leaf-Segmentation-Tool).
 
@@ -55,6 +73,7 @@ Below is an example of how the script displays and image, the user then selects 
 ---
 
 ### Custom Borders for 'geoR' Package Objects.
+
 The following *get_borders(my.lonlat, concavity_param, frac)* function finds the concave hull of your geoR data object, and generates 
 a nice bounding border for your geoR object. 
 

@@ -220,9 +220,14 @@ There is a substantial amount of details which I will suppress, but essentially 
 
 <iframe src="https://gsfochesatto-graphcutsegmentation.hf.space"
 	frameborder="0"
-	width="850"
-	height="1000">
+	width="950"
+	height="950"
+	style="width:90%; border: 2px solid #4582ec;
+                                                border-radius: 4px;
+                                                border-radius: 8px" align="center">
 	</iframe>
+	
+---
 
 # Network Simplex
 
