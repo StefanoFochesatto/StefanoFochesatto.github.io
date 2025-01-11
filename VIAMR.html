@@ -11,7 +11,7 @@
 
 
 
-<title>Stefano Fochesatto</title>
+<title>VIAMR Demo</title>
 
 <script src="site_libs/header-attrs-2.28/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -301,130 +301,58 @@ $(document).ready(function () {
 
 <p><link rel="stylesheet" href="styles.css" type="text/css">
 <link rel="stylesheet" href="academicicons/css/academicons.min.css"/></p>
-<style>
-.vertical-video-container img {
-    width: auto;
-    height: auto; /* Fit GIF vertically */
-    max-height: 80vh; /* Adjust as needed */
-    border-radius: 8px; /* Optional: rounded corners */
-    display: block; /* Ensures no extra space below image */
-    margin: 0 auto;
+<style type="text/css">
+.main-container {
+  max-width: 1800px !important;
+  margin-left: auto !important;
+  width="100%" !important;
+  height="100%" !important;
+  margin-right: auto !important;
+
 }
+
+.container-fluid.main-container {
+  max-width: 1800px !important;
+  margin-left: auto !important;
+  width="100%" !important;
+  height="100%" !important;
+  margin-right: auto !important;
+
+}
+
+html, body{
+    height:100%;    
+} 
+
+
+
+.content {
+    flex: 1; /* Occupies remaining space */
+    display: flex;
+    align-items: stretch;
+}
+
+
+iframe {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    z-index: 999999 !important;
+}
+
+
 </style>
-<div id="adaptive-mesh-refinement-for-variational-inequalities"
-class="section level3">
-<h3>Adaptive Mesh Refinement for Variational Inequalities</h3>
-<p>My master’s research focuses on developing methods for adaptive mesh
-refinement in variational inequalities. These methods were implemented
-using the Firedrake and Netgen libraries. For more details, visit the <a
-href="https://github.com/StefanoFochesatto/VI-AMR">repository</a>, and
-keep an eye out for the upcoming paper.</p>
-<p><a href="VIAMR.html" style="font-size: 20px">VIAMR Demo</a></p>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img src="images/animated_mesh.gif" alt="Vertical GIF" style="width:80%; border: 2px solid #4582ec;
-                                                border-radius: 4px;
-                                                border-radius: 8px" align="center"></p>
-</div><div class="column" style="width:50%;">
-<p><img src="images/Solution.png" style="width:70%; border: 2px solid #4582ec;
-                                                border-radius: 4px;
-                                                border-radius: 8px" align="center"></p>
-<p><img src="images/animated_surface.gif" alt="Vertical GIF" style="width:80%; border: 2px solid #4582ec;
-                                                border-radius: 4px;
-                                                border-radius: 8px" align="center"></p>
-</div>
-</div>
-<hr />
-</div>
-<div id="graph-cut-image-segmentation" class="section level3">
-<h3>Graph Cut Image Segmentation</h3>
-<p>Throughout my master’s degree, I focused on projects at the
-intersection of graph theory and numerical methods. During my time at
-the Museum of the North Herbarium lab and the Cold Regions Research and
-Engineering Laboratory, I primarily worked on computer vision methods,
-including segmentation, object detection, clustering, and landmark
-detection.</p>
-<p>To unify the concepts I learned in my graduate graph theory course, I
-presented several formulations of graph flow problems as linear
-programming problems, along with the theory behind the network simplex
-method. These methods intersect interestingly in applications like graph
-cut image segmentation. Below is a demonstration I created for the
-class, implementing the techniques described in <a
-href="https://www.researchgate.net/publication/220183511_Lazy_snapping">Li
-et al. (2004)</a>.</p>
-<iframe src="https://gsfochesatto-graphcutsegmentation.hf.space" frameborder="0" width="850" height="950" style="width:90%; border: 2px solid #4582ec;
-                                                border-radius: 4px;
-                                                border-radius: 8px" align="center">
-</iframe>
-<hr />
-</div>
-<div id="leaf-segmentation-tool" class="section level3">
-<h3>Leaf Segmentation Tool</h3>
-<p>This script is essentially a polygonal cropping tool, but was made to
-facilitate the preprocessing step of herbarium sheets as outlined during
-the <a
-href="https://stefanofochesatto.github.io/files/DeepLearningImageClusteringBotany2022.pdf">presentation
-at Botony 2022</a>. The script begins by prompting the user for their
-images directory, then the first image is displayed. The user selects a
-bounding box with the cursor and the space button is used to crop.
-Pressing the escape key proceeds to the next image where the user can
-again crop as desired. Below is an example of how the script displays
-and image, the user then selects bounding boxes in cyan, and the
-resultant leaf level masks. This tool and further documentation can be
-found <a
-href="https://github.com/StefanoFochesatto/Leaf-Segmentation-Tool">here</a>.</p>
-<p><img src="images/SegmentationTool.png" style="width:95%; border: 2px solid #4582ec;
-                                                border-radius: 4px;
-                                                border-radius: 8px" align="center"></p>
-<hr />
-</div>
-<div id="custom-borders-for-geor-package-objects."
-class="section level3">
-<h3>Custom Borders for ‘geoR’ Package Objects.</h3>
-<p>The following <em>get_borders(my.lonlat, concavity_param, frac)</em>
-function finds the concave hull of your geoR data object, and generates
-a nice bounding border for your geoR object.</p>
-<p><a
-href="https://github.com/StefanoFochesatto/Homework-Spring-2022/blob/main/Spatial%20Statistics/get_borders.r"><em>get_borders()</em></a></p>
-<p>The function takes three parameters, my.lonlat, concavity_param, and
-frac. The my.lonlat parameter is simply a 2 column matrix of your
-lon,lat data. The concavity_param argument is a relative measure of
-concavity. When set to 1 we get a concave hull, for sufficiently large
-concavity_param we get the convex hull. The frac argument extends the
-border in every direction. The function uses the geoR, concaveman, and
-rgeos packages. The following is an example, and results.</p>
-<pre class="r"><code>install.packages(c(&quot;geoR&quot;, &quot;concaveman&quot;, &quot;rgeos&quot;))
-library(geoR)
-library(concaveman)
-library(rgeos)
-
-source(&quot;get_borders.r&quot;) # or copy and paste directly into RStudio
-
-## Generating Data
-set.seed(5834)
-n &lt;- 14
-lons &lt;- runif(n)
-lats &lt;- runif(n)
-yyy &lt;- rnorm(n)
-## Creating geoR object
-mygeo &lt;- as.geodata(cbind(lons,lats,yyy))
-## Custom Border
-mygeo$borders &lt;- get.borders(cbind(lons,lats), concavity_param = 1, frac = .15)
-
-## Plotting
-plot(mygeo)</code></pre>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p><img src="images/Example.png" style="width:95%; border: 2px solid #4582ec;
-                                                border-radius: 4px;
-                                                border-radius: 8px" align="center"></p>
-</div><div class="column" style="width:50%;">
-<p><img src="images/image.png" style="width:95%; border: 2px solid #4582ec;
-                                                border-radius: 4px;
-                                                border-radius: 8px" align="center"></p>
-</div>
-</div>
-</div>
+<p><iframe src="https://viamrwebapp-35576668736.us-central1.run.app/" width="100%" height="100%" frameborder="0" allowtransparency="true" allow="encrypted-media" style="border: 2px solid #4582ec;
+                                                border-radius: 4px; 
+                                                padding: 5px; 
+                                                margin-top: 20px;
+                                                border-radius: 8px" align="center"></iframe></p>
 
 
 

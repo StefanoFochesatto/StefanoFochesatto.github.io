@@ -24,6 +24,9 @@ description: "Small Programming Scripts and Projects"
 
 My master's research focuses on developing methods for adaptive mesh refinement in variational inequalities. These methods were implemented using the Firedrake and Netgen libraries. For more details, visit the [repository](https://github.com/StefanoFochesatto/VI-AMR), and keep an eye out for the upcoming paper.
 
+<a href="VIAMR.html" style="font-size: 20px">VIAMR Demo</a>
+
+
 :::::::::::::: {.columns}
 ::: {.column width="50%"}
 <img src="images/animated_mesh.gif" alt="Vertical GIF" style="width:80%; border: 2px solid #4582ec;
@@ -40,6 +43,8 @@ My master's research focuses on developing methods for adaptive mesh refinement 
                                                 border-radius: 8px" align="center">
 :::
 ::::::::::::::
+
+
 
 ---
 
